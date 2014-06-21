@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.OfPubsubItemMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.OfPubsubItem" >
+    <id column="serviceID" property="serviceid" jdbcType="VARCHAR" />
+    <id column="nodeID" property="nodeid" jdbcType="VARCHAR" />
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="jid" property="jid" jdbcType="VARCHAR" />
+    <result column="creationDate" property="creationdate" jdbcType="CHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="hdvon.model.OfPubsubItem" extends="BaseResultMap" >
+    <result column="payload" property="payload" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    serviceID, nodeID, id, jid, creationDate
+  </sql>
+  <sql id="Blob_Column_List" >
+    payload
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="hdvon.model.OfPubsubItemKey" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ofpubsubitem
+    where serviceID = #{serviceid,jdbcType=VARCHAR}
+      and nodeID = #{nodeid,jdbcType=VARCHAR}
+      and id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="hdvon.model.OfPubsubItemKey" >
+    delete from ofpubsubitem
+    where serviceID = #{serviceid,jdbcType=VARCHAR}
+      and nodeID = #{nodeid,jdbcType=VARCHAR}
+      and id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="hdvon.model.OfPubsubItem" >
+    insert into ofpubsubitem (serviceID, nodeID, id, 
+      jid, creationDate, payload
+      )
+    values (#{serviceid,jdbcType=VARCHAR}, #{nodeid,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR}, 
+      #{jid,jdbcType=VARCHAR}, #{creationdate,jdbcType=CHAR}, #{payload,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.OfPubsubItem" >
+    insert into ofpubsubitem
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serviceid != null" >
+        serviceID,
+      </if>
+      <if test="nodeid != null" >
+        nodeID,
+      </if>
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="jid != null" >
+        jid,
+      </if>
+      <if test="creationdate != null" >
+        creationDate,
+      </if>
+      <if test="payload != null" >
+        payload,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serviceid != null" >
+        #{serviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeid != null" >
+        #{nodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="jid != null" >
+        #{jid,jdbcType=VARCHAR},
+      </if>
+      <if test="creationdate != null" >
+        #{creationdate,jdbcType=CHAR},
+      </if>
+      <if test="payload != null" >
+        #{payload,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hdvon.model.OfPubsubItem" >
+    update ofpubsubitem
+    <set >
+      <if test="jid != null" >
+        jid = #{jid,jdbcType=VARCHAR},
+      </if>
+      <if test="creationdate != null" >
+        creationDate = #{creationdate,jdbcType=CHAR},
+      </if>
+      <if test="payload != null" >
+        payload = #{payload,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where serviceID = #{serviceid,jdbcType=VARCHAR}
+      and nodeID = #{nodeid,jdbcType=VARCHAR}
+      and id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="hdvon.model.OfPubsubItem" >
+    update ofpubsubitem
+    set jid = #{jid,jdbcType=VARCHAR},
+      creationDate = #{creationdate,jdbcType=CHAR},
+      payload = #{payload,jdbcType=LONGVARCHAR}
+    where serviceID = #{serviceid,jdbcType=VARCHAR}
+      and nodeID = #{nodeid,jdbcType=VARCHAR}
+      and id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hdvon.model.OfPubsubItem" >
+    update ofpubsubitem
+    set jid = #{jid,jdbcType=VARCHAR},
+      creationDate = #{creationdate,jdbcType=CHAR}
+    where serviceID = #{serviceid,jdbcType=VARCHAR}
+      and nodeID = #{nodeid,jdbcType=VARCHAR}
+      and id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

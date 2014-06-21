@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.OfPubsubAffiliationMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.OfPubsubAffiliation" >
+    <id column="serviceID" property="serviceid" jdbcType="VARCHAR" />
+    <id column="nodeID" property="nodeid" jdbcType="VARCHAR" />
+    <id column="jid" property="jid" jdbcType="VARCHAR" />
+    <result column="affiliation" property="affiliation" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    serviceID, nodeID, jid, affiliation
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="hdvon.model.OfPubsubAffiliationKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from ofpubsubaffiliation
+    where serviceID = #{serviceid,jdbcType=VARCHAR}
+      and nodeID = #{nodeid,jdbcType=VARCHAR}
+      and jid = #{jid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="hdvon.model.OfPubsubAffiliationKey" >
+    delete from ofpubsubaffiliation
+    where serviceID = #{serviceid,jdbcType=VARCHAR}
+      and nodeID = #{nodeid,jdbcType=VARCHAR}
+      and jid = #{jid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="hdvon.model.OfPubsubAffiliation" >
+    insert into ofpubsubaffiliation (serviceID, nodeID, jid, 
+      affiliation)
+    values (#{serviceid,jdbcType=VARCHAR}, #{nodeid,jdbcType=VARCHAR}, #{jid,jdbcType=VARCHAR}, 
+      #{affiliation,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.OfPubsubAffiliation" >
+    insert into ofpubsubaffiliation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serviceid != null" >
+        serviceID,
+      </if>
+      <if test="nodeid != null" >
+        nodeID,
+      </if>
+      <if test="jid != null" >
+        jid,
+      </if>
+      <if test="affiliation != null" >
+        affiliation,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serviceid != null" >
+        #{serviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeid != null" >
+        #{nodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="jid != null" >
+        #{jid,jdbcType=VARCHAR},
+      </if>
+      <if test="affiliation != null" >
+        #{affiliation,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hdvon.model.OfPubsubAffiliation" >
+    update ofpubsubaffiliation
+    <set >
+      <if test="affiliation != null" >
+        affiliation = #{affiliation,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where serviceID = #{serviceid,jdbcType=VARCHAR}
+      and nodeID = #{nodeid,jdbcType=VARCHAR}
+      and jid = #{jid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hdvon.model.OfPubsubAffiliation" >
+    update ofpubsubaffiliation
+    set affiliation = #{affiliation,jdbcType=VARCHAR}
+    where serviceID = #{serviceid,jdbcType=VARCHAR}
+      and nodeID = #{nodeid,jdbcType=VARCHAR}
+      and jid = #{jid,jdbcType=VARCHAR}
+  </update>
+</mapper>

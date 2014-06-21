@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.HlTravelLogJudgeMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.HlTravelLogJudge" >
+    <id column="JUDGEID" property="judgeid" jdbcType="VARCHAR" />
+    <result column="LOGID" property="logid" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="lastUpdateTime" property="lastupdatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="hdvon.model.HlTravelLogJudge" extends="BaseResultMap" >
+    <result column="JUDGECONTENT" property="judgecontent" jdbcType="BINARY" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    JUDGEID, LOGID, username, lastUpdateTime
+  </sql>
+  <sql id="Blob_Column_List" >
+    JUDGECONTENT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from hl_travellog_judge
+    where JUDGEID = #{judgeid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from hl_travellog_judge
+    where JUDGEID = #{judgeid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="hdvon.model.HlTravelLogJudge" >
+    insert into hl_travellog_judge (JUDGEID, LOGID, username, 
+      lastUpdateTime, JUDGECONTENT)
+    values (#{judgeid,jdbcType=VARCHAR}, #{logid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{lastupdatetime,jdbcType=TIMESTAMP}, #{judgecontent,jdbcType=BINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.HlTravelLogJudge" >
+    insert into hl_travellog_judge
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="judgeid != null" >
+        JUDGEID,
+      </if>
+      <if test="logid != null" >
+        LOGID,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="lastupdatetime != null" >
+        lastUpdateTime,
+      </if>
+      <if test="judgecontent != null" >
+        JUDGECONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="judgeid != null" >
+        #{judgeid,jdbcType=VARCHAR},
+      </if>
+      <if test="logid != null" >
+        #{logid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="lastupdatetime != null" >
+        #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="judgecontent != null" >
+        #{judgecontent,jdbcType=BINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hdvon.model.HlTravelLogJudge" >
+    update hl_travellog_judge
+    <set >
+      <if test="logid != null" >
+        LOGID = #{logid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="lastupdatetime != null" >
+        lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="judgecontent != null" >
+        JUDGECONTENT = #{judgecontent,jdbcType=BINARY},
+      </if>
+    </set>
+    where JUDGEID = #{judgeid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="hdvon.model.HlTravelLogJudge" >
+    update hl_travellog_judge
+    set LOGID = #{logid,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      JUDGECONTENT = #{judgecontent,jdbcType=BINARY}
+    where JUDGEID = #{judgeid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hdvon.model.HlTravelLogJudge" >
+    update hl_travellog_judge
+    set LOGID = #{logid,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP}
+    where JUDGEID = #{judgeid,jdbcType=VARCHAR}
+  </update>
+</mapper>

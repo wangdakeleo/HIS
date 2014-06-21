@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.OfMucConversationLogMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.OfMucConversationLog" >
+    <result column="roomID" property="roomid" jdbcType="BIGINT" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="logTime" property="logtime" jdbcType="CHAR" />
+    <result column="subject" property="subject" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="hdvon.model.OfMucConversationLogWithBLOBs" extends="BaseResultMap" >
+    <result column="sender" property="sender" jdbcType="LONGVARCHAR" />
+    <result column="body" property="body" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Blob_Column_List" >
+    sender, body
+  </sql>
+  <insert id="insert" parameterType="hdvon.model.OfMucConversationLogWithBLOBs" >
+    insert into ofmucconversationlog (roomID, nickname, logTime, 
+      subject, sender, body
+      )
+    values (#{roomid,jdbcType=BIGINT}, #{nickname,jdbcType=VARCHAR}, #{logtime,jdbcType=CHAR}, 
+      #{subject,jdbcType=VARCHAR}, #{sender,jdbcType=LONGVARCHAR}, #{body,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.OfMucConversationLogWithBLOBs" >
+    insert into ofmucconversationlog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roomid != null" >
+        roomID,
+      </if>
+      <if test="nickname != null" >
+        nickname,
+      </if>
+      <if test="logtime != null" >
+        logTime,
+      </if>
+      <if test="subject != null" >
+        subject,
+      </if>
+      <if test="sender != null" >
+        sender,
+      </if>
+      <if test="body != null" >
+        body,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roomid != null" >
+        #{roomid,jdbcType=BIGINT},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="logtime != null" >
+        #{logtime,jdbcType=CHAR},
+      </if>
+      <if test="subject != null" >
+        #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="sender != null" >
+        #{sender,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="body != null" >
+        #{body,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

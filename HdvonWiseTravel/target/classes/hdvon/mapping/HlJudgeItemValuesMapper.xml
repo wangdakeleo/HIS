@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.HlJudgeItemValuesMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.HlJudgeItemValues" >
+    <id column="VALUEID" property="valueid" jdbcType="VARCHAR" />
+    <result column="ITEMID" property="itemid" jdbcType="VARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="VARCHAR" />
+    <result column="VALUE" property="value" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    VALUEID, ITEMID, CONTENT, VALUE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from hl_judgeitemvalues
+    where VALUEID = #{valueid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from hl_judgeitemvalues
+    where VALUEID = #{valueid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="hdvon.model.HlJudgeItemValues" >
+    insert into hl_judgeitemvalues (VALUEID, ITEMID, CONTENT, 
+      VALUE)
+    values (#{valueid,jdbcType=VARCHAR}, #{itemid,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{value,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.HlJudgeItemValues" >
+    insert into hl_judgeitemvalues
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="valueid != null" >
+        VALUEID,
+      </if>
+      <if test="itemid != null" >
+        ITEMID,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+      <if test="value != null" >
+        VALUE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="valueid != null" >
+        #{valueid,jdbcType=VARCHAR},
+      </if>
+      <if test="itemid != null" >
+        #{itemid,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null" >
+        #{value,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hdvon.model.HlJudgeItemValues" >
+    update hl_judgeitemvalues
+    <set >
+      <if test="itemid != null" >
+        ITEMID = #{itemid,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null" >
+        VALUE = #{value,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where VALUEID = #{valueid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hdvon.model.HlJudgeItemValues" >
+    update hl_judgeitemvalues
+    set ITEMID = #{itemid,jdbcType=VARCHAR},
+      CONTENT = #{content,jdbcType=VARCHAR},
+      VALUE = #{value,jdbcType=DECIMAL}
+    where VALUEID = #{valueid,jdbcType=VARCHAR}
+  </update>
+</mapper>

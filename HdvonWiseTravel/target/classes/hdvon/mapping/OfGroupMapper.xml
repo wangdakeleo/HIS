@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.OfGroupMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.OfGroup" >
+    <id column="groupName" property="groupname" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    groupName, description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ofgroup
+    where groupName = #{groupname,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ofgroup
+    where groupName = #{groupname,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="hdvon.model.OfGroup" >
+    insert into ofgroup (groupName, description)
+    values (#{groupname,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.OfGroup" >
+    insert into ofgroup
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="groupname != null" >
+        groupName,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="groupname != null" >
+        #{groupname,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hdvon.model.OfGroup" >
+    update ofgroup
+    <set >
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where groupName = #{groupname,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hdvon.model.OfGroup" >
+    update ofgroup
+    set description = #{description,jdbcType=VARCHAR}
+    where groupName = #{groupname,jdbcType=VARCHAR}
+  </update>
+</mapper>

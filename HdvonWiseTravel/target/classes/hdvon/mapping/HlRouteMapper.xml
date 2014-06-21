@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.HlRouteMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.HlRoute" >
+    <id column="ROUTEID" property="routeid" jdbcType="VARCHAR" />
+    <result column="ROUTENAME" property="routename" jdbcType="VARCHAR" />
+    <result column="ENTID" property="entid" jdbcType="VARCHAR" />
+    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="lastUpdateTime" property="lastupdatetime" jdbcType="TIMESTAMP" />
+    <result column="PARENTID" property="parentid" jdbcType="VARCHAR" />
+    <result column="ROUTETYPE" property="routetype" jdbcType="VARCHAR" />
+    <result column="RECOMMANDPATH" property="recommandpath" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="hdvon.model.HlRoute" extends="BaseResultMap" >
+    <result column="RECOMMAND" property="recommand" jdbcType="BINARY" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ROUTEID, ROUTENAME, ENTID, DESCRIPTION, status, creator, createtime, lastUpdateTime, 
+    PARENTID, ROUTETYPE, RECOMMANDPATH
+  </sql>
+  <sql id="Blob_Column_List" >
+    RECOMMAND
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from hl_route
+    where ROUTEID = #{routeid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from hl_route
+    where ROUTEID = #{routeid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="hdvon.model.HlRoute" >
+    insert into hl_route (ROUTEID, ROUTENAME, ENTID, 
+      DESCRIPTION, status, creator, 
+      createtime, lastUpdateTime, PARENTID, 
+      ROUTETYPE, RECOMMANDPATH, RECOMMAND
+      )
+    values (#{routeid,jdbcType=VARCHAR}, #{routename,jdbcType=VARCHAR}, #{entid,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{creator,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{lastupdatetime,jdbcType=TIMESTAMP}, #{parentid,jdbcType=VARCHAR}, 
+      #{routetype,jdbcType=VARCHAR}, #{recommandpath,jdbcType=VARCHAR}, #{recommand,jdbcType=BINARY}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.HlRoute" >
+    insert into hl_route
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="routeid != null" >
+        ROUTEID,
+      </if>
+      <if test="routename != null" >
+        ROUTENAME,
+      </if>
+      <if test="entid != null" >
+        ENTID,
+      </if>
+      <if test="description != null" >
+        DESCRIPTION,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="lastupdatetime != null" >
+        lastUpdateTime,
+      </if>
+      <if test="parentid != null" >
+        PARENTID,
+      </if>
+      <if test="routetype != null" >
+        ROUTETYPE,
+      </if>
+      <if test="recommandpath != null" >
+        RECOMMANDPATH,
+      </if>
+      <if test="recommand != null" >
+        RECOMMAND,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="routeid != null" >
+        #{routeid,jdbcType=VARCHAR},
+      </if>
+      <if test="routename != null" >
+        #{routename,jdbcType=VARCHAR},
+      </if>
+      <if test="entid != null" >
+        #{entid,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastupdatetime != null" >
+        #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=VARCHAR},
+      </if>
+      <if test="routetype != null" >
+        #{routetype,jdbcType=VARCHAR},
+      </if>
+      <if test="recommandpath != null" >
+        #{recommandpath,jdbcType=VARCHAR},
+      </if>
+      <if test="recommand != null" >
+        #{recommand,jdbcType=BINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hdvon.model.HlRoute" >
+    update hl_route
+    <set >
+      <if test="routename != null" >
+        ROUTENAME = #{routename,jdbcType=VARCHAR},
+      </if>
+      <if test="entid != null" >
+        ENTID = #{entid,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastupdatetime != null" >
+        lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parentid != null" >
+        PARENTID = #{parentid,jdbcType=VARCHAR},
+      </if>
+      <if test="routetype != null" >
+        ROUTETYPE = #{routetype,jdbcType=VARCHAR},
+      </if>
+      <if test="recommandpath != null" >
+        RECOMMANDPATH = #{recommandpath,jdbcType=VARCHAR},
+      </if>
+      <if test="recommand != null" >
+        RECOMMAND = #{recommand,jdbcType=BINARY},
+      </if>
+    </set>
+    where ROUTEID = #{routeid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="hdvon.model.HlRoute" >
+    update hl_route
+    set ROUTENAME = #{routename,jdbcType=VARCHAR},
+      ENTID = #{entid,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      creator = #{creator,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      PARENTID = #{parentid,jdbcType=VARCHAR},
+      ROUTETYPE = #{routetype,jdbcType=VARCHAR},
+      RECOMMANDPATH = #{recommandpath,jdbcType=VARCHAR},
+      RECOMMAND = #{recommand,jdbcType=BINARY}
+    where ROUTEID = #{routeid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hdvon.model.HlRoute" >
+    update hl_route
+    set ROUTENAME = #{routename,jdbcType=VARCHAR},
+      ENTID = #{entid,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      creator = #{creator,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      PARENTID = #{parentid,jdbcType=VARCHAR},
+      ROUTETYPE = #{routetype,jdbcType=VARCHAR},
+      RECOMMANDPATH = #{recommandpath,jdbcType=VARCHAR}
+    where ROUTEID = #{routeid,jdbcType=VARCHAR}
+  </update>
+</mapper>

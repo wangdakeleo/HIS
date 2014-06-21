@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.OfPubsubDefaultConfMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.OfPubsubDefaultConf" >
+    <id column="serviceID" property="serviceid" jdbcType="VARCHAR" />
+    <id column="leaf" property="leaf" jdbcType="TINYINT" />
+    <result column="deliverPayloads" property="deliverpayloads" jdbcType="TINYINT" />
+    <result column="maxPayloadSize" property="maxpayloadsize" jdbcType="INTEGER" />
+    <result column="persistItems" property="persistitems" jdbcType="TINYINT" />
+    <result column="maxItems" property="maxitems" jdbcType="INTEGER" />
+    <result column="notifyConfigChanges" property="notifyconfigchanges" jdbcType="TINYINT" />
+    <result column="notifyDelete" property="notifydelete" jdbcType="TINYINT" />
+    <result column="notifyRetract" property="notifyretract" jdbcType="TINYINT" />
+    <result column="presenceBased" property="presencebased" jdbcType="TINYINT" />
+    <result column="sendItemSubscribe" property="senditemsubscribe" jdbcType="TINYINT" />
+    <result column="publisherModel" property="publishermodel" jdbcType="VARCHAR" />
+    <result column="subscriptionEnabled" property="subscriptionenabled" jdbcType="TINYINT" />
+    <result column="accessModel" property="accessmodel" jdbcType="VARCHAR" />
+    <result column="language" property="language" jdbcType="VARCHAR" />
+    <result column="replyPolicy" property="replypolicy" jdbcType="VARCHAR" />
+    <result column="associationPolicy" property="associationpolicy" jdbcType="VARCHAR" />
+    <result column="maxLeafNodes" property="maxleafnodes" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    serviceID, leaf, deliverPayloads, maxPayloadSize, persistItems, maxItems, notifyConfigChanges, 
+    notifyDelete, notifyRetract, presenceBased, sendItemSubscribe, publisherModel, subscriptionEnabled, 
+    accessModel, language, replyPolicy, associationPolicy, maxLeafNodes
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="hdvon.model.OfPubsubDefaultConfKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from ofpubsubdefaultconf
+    where serviceID = #{serviceid,jdbcType=VARCHAR}
+      and leaf = #{leaf,jdbcType=TINYINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="hdvon.model.OfPubsubDefaultConfKey" >
+    delete from ofpubsubdefaultconf
+    where serviceID = #{serviceid,jdbcType=VARCHAR}
+      and leaf = #{leaf,jdbcType=TINYINT}
+  </delete>
+  <insert id="insert" parameterType="hdvon.model.OfPubsubDefaultConf" >
+    insert into ofpubsubdefaultconf (serviceID, leaf, deliverPayloads, 
+      maxPayloadSize, persistItems, maxItems, 
+      notifyConfigChanges, notifyDelete, notifyRetract, 
+      presenceBased, sendItemSubscribe, publisherModel, 
+      subscriptionEnabled, accessModel, language, 
+      replyPolicy, associationPolicy, maxLeafNodes
+      )
+    values (#{serviceid,jdbcType=VARCHAR}, #{leaf,jdbcType=TINYINT}, #{deliverpayloads,jdbcType=TINYINT}, 
+      #{maxpayloadsize,jdbcType=INTEGER}, #{persistitems,jdbcType=TINYINT}, #{maxitems,jdbcType=INTEGER}, 
+      #{notifyconfigchanges,jdbcType=TINYINT}, #{notifydelete,jdbcType=TINYINT}, #{notifyretract,jdbcType=TINYINT}, 
+      #{presencebased,jdbcType=TINYINT}, #{senditemsubscribe,jdbcType=TINYINT}, #{publishermodel,jdbcType=VARCHAR}, 
+      #{subscriptionenabled,jdbcType=TINYINT}, #{accessmodel,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, 
+      #{replypolicy,jdbcType=VARCHAR}, #{associationpolicy,jdbcType=VARCHAR}, #{maxleafnodes,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.OfPubsubDefaultConf" >
+    insert into ofpubsubdefaultconf
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serviceid != null" >
+        serviceID,
+      </if>
+      <if test="leaf != null" >
+        leaf,
+      </if>
+      <if test="deliverpayloads != null" >
+        deliverPayloads,
+      </if>
+      <if test="maxpayloadsize != null" >
+        maxPayloadSize,
+      </if>
+      <if test="persistitems != null" >
+        persistItems,
+      </if>
+      <if test="maxitems != null" >
+        maxItems,
+      </if>
+      <if test="notifyconfigchanges != null" >
+        notifyConfigChanges,
+      </if>
+      <if test="notifydelete != null" >
+        notifyDelete,
+      </if>
+      <if test="notifyretract != null" >
+        notifyRetract,
+      </if>
+      <if test="presencebased != null" >
+        presenceBased,
+      </if>
+      <if test="senditemsubscribe != null" >
+        sendItemSubscribe,
+      </if>
+      <if test="publishermodel != null" >
+        publisherModel,
+      </if>
+      <if test="subscriptionenabled != null" >
+        subscriptionEnabled,
+      </if>
+      <if test="accessmodel != null" >
+        accessModel,
+      </if>
+      <if test="language != null" >
+        language,
+      </if>
+      <if test="replypolicy != null" >
+        replyPolicy,
+      </if>
+      <if test="associationpolicy != null" >
+        associationPolicy,
+      </if>
+      <if test="maxleafnodes != null" >
+        maxLeafNodes,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serviceid != null" >
+        #{serviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="leaf != null" >
+        #{leaf,jdbcType=TINYINT},
+      </if>
+      <if test="deliverpayloads != null" >
+        #{deliverpayloads,jdbcType=TINYINT},
+      </if>
+      <if test="maxpayloadsize != null" >
+        #{maxpayloadsize,jdbcType=INTEGER},
+      </if>
+      <if test="persistitems != null" >
+        #{persistitems,jdbcType=TINYINT},
+      </if>
+      <if test="maxitems != null" >
+        #{maxitems,jdbcType=INTEGER},
+      </if>
+      <if test="notifyconfigchanges != null" >
+        #{notifyconfigchanges,jdbcType=TINYINT},
+      </if>
+      <if test="notifydelete != null" >
+        #{notifydelete,jdbcType=TINYINT},
+      </if>
+      <if test="notifyretract != null" >
+        #{notifyretract,jdbcType=TINYINT},
+      </if>
+      <if test="presencebased != null" >
+        #{presencebased,jdbcType=TINYINT},
+      </if>
+      <if test="senditemsubscribe != null" >
+        #{senditemsubscribe,jdbcType=TINYINT},
+      </if>
+      <if test="publishermodel != null" >
+        #{publishermodel,jdbcType=VARCHAR},
+      </if>
+      <if test="subscriptionenabled != null" >
+        #{subscriptionenabled,jdbcType=TINYINT},
+      </if>
+      <if test="accessmodel != null" >
+        #{accessmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null" >
+        #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="replypolicy != null" >
+        #{replypolicy,jdbcType=VARCHAR},
+      </if>
+      <if test="associationpolicy != null" >
+        #{associationpolicy,jdbcType=VARCHAR},
+      </if>
+      <if test="maxleafnodes != null" >
+        #{maxleafnodes,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hdvon.model.OfPubsubDefaultConf" >
+    update ofpubsubdefaultconf
+    <set >
+      <if test="deliverpayloads != null" >
+        deliverPayloads = #{deliverpayloads,jdbcType=TINYINT},
+      </if>
+      <if test="maxpayloadsize != null" >
+        maxPayloadSize = #{maxpayloadsize,jdbcType=INTEGER},
+      </if>
+      <if test="persistitems != null" >
+        persistItems = #{persistitems,jdbcType=TINYINT},
+      </if>
+      <if test="maxitems != null" >
+        maxItems = #{maxitems,jdbcType=INTEGER},
+      </if>
+      <if test="notifyconfigchanges != null" >
+        notifyConfigChanges = #{notifyconfigchanges,jdbcType=TINYINT},
+      </if>
+      <if test="notifydelete != null" >
+        notifyDelete = #{notifydelete,jdbcType=TINYINT},
+      </if>
+      <if test="notifyretract != null" >
+        notifyRetract = #{notifyretract,jdbcType=TINYINT},
+      </if>
+      <if test="presencebased != null" >
+        presenceBased = #{presencebased,jdbcType=TINYINT},
+      </if>
+      <if test="senditemsubscribe != null" >
+        sendItemSubscribe = #{senditemsubscribe,jdbcType=TINYINT},
+      </if>
+      <if test="publishermodel != null" >
+        publisherModel = #{publishermodel,jdbcType=VARCHAR},
+      </if>
+      <if test="subscriptionenabled != null" >
+        subscriptionEnabled = #{subscriptionenabled,jdbcType=TINYINT},
+      </if>
+      <if test="accessmodel != null" >
+        accessModel = #{accessmodel,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null" >
+        language = #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="replypolicy != null" >
+        replyPolicy = #{replypolicy,jdbcType=VARCHAR},
+      </if>
+      <if test="associationpolicy != null" >
+        associationPolicy = #{associationpolicy,jdbcType=VARCHAR},
+      </if>
+      <if test="maxleafnodes != null" >
+        maxLeafNodes = #{maxleafnodes,jdbcType=INTEGER},
+      </if>
+    </set>
+    where serviceID = #{serviceid,jdbcType=VARCHAR}
+      and leaf = #{leaf,jdbcType=TINYINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hdvon.model.OfPubsubDefaultConf" >
+    update ofpubsubdefaultconf
+    set deliverPayloads = #{deliverpayloads,jdbcType=TINYINT},
+      maxPayloadSize = #{maxpayloadsize,jdbcType=INTEGER},
+      persistItems = #{persistitems,jdbcType=TINYINT},
+      maxItems = #{maxitems,jdbcType=INTEGER},
+      notifyConfigChanges = #{notifyconfigchanges,jdbcType=TINYINT},
+      notifyDelete = #{notifydelete,jdbcType=TINYINT},
+      notifyRetract = #{notifyretract,jdbcType=TINYINT},
+      presenceBased = #{presencebased,jdbcType=TINYINT},
+      sendItemSubscribe = #{senditemsubscribe,jdbcType=TINYINT},
+      publisherModel = #{publishermodel,jdbcType=VARCHAR},
+      subscriptionEnabled = #{subscriptionenabled,jdbcType=TINYINT},
+      accessModel = #{accessmodel,jdbcType=VARCHAR},
+      language = #{language,jdbcType=VARCHAR},
+      replyPolicy = #{replypolicy,jdbcType=VARCHAR},
+      associationPolicy = #{associationpolicy,jdbcType=VARCHAR},
+      maxLeafNodes = #{maxleafnodes,jdbcType=INTEGER}
+    where serviceID = #{serviceid,jdbcType=VARCHAR}
+      and leaf = #{leaf,jdbcType=TINYINT}
+  </update>
+</mapper>

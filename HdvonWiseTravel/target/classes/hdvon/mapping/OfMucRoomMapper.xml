@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.OfMucRoomMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.OfMucRoom" >
+    <id column="serviceID" property="serviceid" jdbcType="BIGINT" />
+    <id column="name" property="name" jdbcType="VARCHAR" />
+    <result column="roomID" property="roomid" jdbcType="BIGINT" />
+    <result column="creationDate" property="creationdate" jdbcType="CHAR" />
+    <result column="modificationDate" property="modificationdate" jdbcType="CHAR" />
+    <result column="naturalName" property="naturalname" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="lockedDate" property="lockeddate" jdbcType="CHAR" />
+    <result column="emptyDate" property="emptydate" jdbcType="CHAR" />
+    <result column="canChangeSubject" property="canchangesubject" jdbcType="TINYINT" />
+    <result column="maxUsers" property="maxusers" jdbcType="INTEGER" />
+    <result column="publicRoom" property="publicroom" jdbcType="TINYINT" />
+    <result column="moderated" property="moderated" jdbcType="TINYINT" />
+    <result column="membersOnly" property="membersonly" jdbcType="TINYINT" />
+    <result column="canInvite" property="caninvite" jdbcType="TINYINT" />
+    <result column="roomPassword" property="roompassword" jdbcType="VARCHAR" />
+    <result column="canDiscoverJID" property="candiscoverjid" jdbcType="TINYINT" />
+    <result column="logEnabled" property="logenabled" jdbcType="TINYINT" />
+    <result column="subject" property="subject" jdbcType="VARCHAR" />
+    <result column="rolesToBroadcast" property="rolestobroadcast" jdbcType="TINYINT" />
+    <result column="useReservedNick" property="usereservednick" jdbcType="TINYINT" />
+    <result column="canChangeNick" property="canchangenick" jdbcType="TINYINT" />
+    <result column="canRegister" property="canregister" jdbcType="TINYINT" />
+    <result column="ROUTEID" property="routeid" jdbcType="INTEGER" />
+    <result column="userId" property="userid" jdbcType="VARCHAR" />
+    <result column="begintime" property="begintime" jdbcType="TIMESTAMP" />
+    <result column="endtime" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="CREATOR" property="creator" jdbcType="VARCHAR" />
+    <result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="lastUpdateTime" property="lastupdatetime" jdbcType="TIMESTAMP" />
+    <result column="reporttime" property="reporttime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="hdvon.model.OfMucRoomWithBLOBs" extends="BaseResultMap" >
+    <result column="schedule" property="schedule" jdbcType="BINARY" />
+    <result column="circlereport" property="circlereport" jdbcType="BINARY" />
+    <result column="TOURISTS" property="tourists" jdbcType="BINARY" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    serviceID, name, roomID, creationDate, modificationDate, naturalName, description, 
+    lockedDate, emptyDate, canChangeSubject, maxUsers, publicRoom, moderated, membersOnly, 
+    canInvite, roomPassword, canDiscoverJID, logEnabled, subject, rolesToBroadcast, useReservedNick, 
+    canChangeNick, canRegister, ROUTEID, userId, begintime, endtime, status, CREATOR, 
+    CREATETIME, lastUpdateTime, reporttime
+  </sql>
+  <sql id="Blob_Column_List" >
+    schedule, circlereport, TOURISTS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="hdvon.model.OfMucRoomKey" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ofmucroom
+    where serviceID = #{serviceid,jdbcType=BIGINT}
+      and name = #{name,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="hdvon.model.OfMucRoomKey" >
+    delete from ofmucroom
+    where serviceID = #{serviceid,jdbcType=BIGINT}
+      and name = #{name,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="hdvon.model.OfMucRoomWithBLOBs" >
+    insert into ofmucroom (serviceID, name, roomID, 
+      creationDate, modificationDate, naturalName, 
+      description, lockedDate, emptyDate, 
+      canChangeSubject, maxUsers, publicRoom, 
+      moderated, membersOnly, canInvite, 
+      roomPassword, canDiscoverJID, logEnabled, 
+      subject, rolesToBroadcast, useReservedNick, 
+      canChangeNick, canRegister, ROUTEID, 
+      userId, begintime, endtime, 
+      status, CREATOR, CREATETIME, 
+      lastUpdateTime, reporttime, schedule, 
+      circlereport, TOURISTS)
+    values (#{serviceid,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{roomid,jdbcType=BIGINT}, 
+      #{creationdate,jdbcType=CHAR}, #{modificationdate,jdbcType=CHAR}, #{naturalname,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{lockeddate,jdbcType=CHAR}, #{emptydate,jdbcType=CHAR}, 
+      #{canchangesubject,jdbcType=TINYINT}, #{maxusers,jdbcType=INTEGER}, #{publicroom,jdbcType=TINYINT}, 
+      #{moderated,jdbcType=TINYINT}, #{membersonly,jdbcType=TINYINT}, #{caninvite,jdbcType=TINYINT}, 
+      #{roompassword,jdbcType=VARCHAR}, #{candiscoverjid,jdbcType=TINYINT}, #{logenabled,jdbcType=TINYINT}, 
+      #{subject,jdbcType=VARCHAR}, #{rolestobroadcast,jdbcType=TINYINT}, #{usereservednick,jdbcType=TINYINT}, 
+      #{canchangenick,jdbcType=TINYINT}, #{canregister,jdbcType=TINYINT}, #{routeid,jdbcType=INTEGER}, 
+      #{userid,jdbcType=VARCHAR}, #{begintime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT}, #{creator,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{lastupdatetime,jdbcType=TIMESTAMP}, #{reporttime,jdbcType=TIMESTAMP}, #{schedule,jdbcType=BINARY}, 
+      #{circlereport,jdbcType=BINARY}, #{tourists,jdbcType=BINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.OfMucRoomWithBLOBs" >
+    insert into ofmucroom
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serviceid != null" >
+        serviceID,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="roomid != null" >
+        roomID,
+      </if>
+      <if test="creationdate != null" >
+        creationDate,
+      </if>
+      <if test="modificationdate != null" >
+        modificationDate,
+      </if>
+      <if test="naturalname != null" >
+        naturalName,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="lockeddate != null" >
+        lockedDate,
+      </if>
+      <if test="emptydate != null" >
+        emptyDate,
+      </if>
+      <if test="canchangesubject != null" >
+        canChangeSubject,
+      </if>
+      <if test="maxusers != null" >
+        maxUsers,
+      </if>
+      <if test="publicroom != null" >
+        publicRoom,
+      </if>
+      <if test="moderated != null" >
+        moderated,
+      </if>
+      <if test="membersonly != null" >
+        membersOnly,
+      </if>
+      <if test="caninvite != null" >
+        canInvite,
+      </if>
+      <if test="roompassword != null" >
+        roomPassword,
+      </if>
+      <if test="candiscoverjid != null" >
+        canDiscoverJID,
+      </if>
+      <if test="logenabled != null" >
+        logEnabled,
+      </if>
+      <if test="subject != null" >
+        subject,
+      </if>
+      <if test="rolestobroadcast != null" >
+        rolesToBroadcast,
+      </if>
+      <if test="usereservednick != null" >
+        useReservedNick,
+      </if>
+      <if test="canchangenick != null" >
+        canChangeNick,
+      </if>
+      <if test="canregister != null" >
+        canRegister,
+      </if>
+      <if test="routeid != null" >
+        ROUTEID,
+      </if>
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="begintime != null" >
+        begintime,
+      </if>
+      <if test="endtime != null" >
+        endtime,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="creator != null" >
+        CREATOR,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="lastupdatetime != null" >
+        lastUpdateTime,
+      </if>
+      <if test="reporttime != null" >
+        reporttime,
+      </if>
+      <if test="schedule != null" >
+        schedule,
+      </if>
+      <if test="circlereport != null" >
+        circlereport,
+      </if>
+      <if test="tourists != null" >
+        TOURISTS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serviceid != null" >
+        #{serviceid,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="roomid != null" >
+        #{roomid,jdbcType=BIGINT},
+      </if>
+      <if test="creationdate != null" >
+        #{creationdate,jdbcType=CHAR},
+      </if>
+      <if test="modificationdate != null" >
+        #{modificationdate,jdbcType=CHAR},
+      </if>
+      <if test="naturalname != null" >
+        #{naturalname,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="lockeddate != null" >
+        #{lockeddate,jdbcType=CHAR},
+      </if>
+      <if test="emptydate != null" >
+        #{emptydate,jdbcType=CHAR},
+      </if>
+      <if test="canchangesubject != null" >
+        #{canchangesubject,jdbcType=TINYINT},
+      </if>
+      <if test="maxusers != null" >
+        #{maxusers,jdbcType=INTEGER},
+      </if>
+      <if test="publicroom != null" >
+        #{publicroom,jdbcType=TINYINT},
+      </if>
+      <if test="moderated != null" >
+        #{moderated,jdbcType=TINYINT},
+      </if>
+      <if test="membersonly != null" >
+        #{membersonly,jdbcType=TINYINT},
+      </if>
+      <if test="caninvite != null" >
+        #{caninvite,jdbcType=TINYINT},
+      </if>
+      <if test="roompassword != null" >
+        #{roompassword,jdbcType=VARCHAR},
+      </if>
+      <if test="candiscoverjid != null" >
+        #{candiscoverjid,jdbcType=TINYINT},
+      </if>
+      <if test="logenabled != null" >
+        #{logenabled,jdbcType=TINYINT},
+      </if>
+      <if test="subject != null" >
+        #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="rolestobroadcast != null" >
+        #{rolestobroadcast,jdbcType=TINYINT},
+      </if>
+      <if test="usereservednick != null" >
+        #{usereservednick,jdbcType=TINYINT},
+      </if>
+      <if test="canchangenick != null" >
+        #{canchangenick,jdbcType=TINYINT},
+      </if>
+      <if test="canregister != null" >
+        #{canregister,jdbcType=TINYINT},
+      </if>
+      <if test="routeid != null" >
+        #{routeid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="begintime != null" >
+        #{begintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastupdatetime != null" >
+        #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reporttime != null" >
+        #{reporttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="schedule != null" >
+        #{schedule,jdbcType=BINARY},
+      </if>
+      <if test="circlereport != null" >
+        #{circlereport,jdbcType=BINARY},
+      </if>
+      <if test="tourists != null" >
+        #{tourists,jdbcType=BINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hdvon.model.OfMucRoomWithBLOBs" >
+    update ofmucroom
+    <set >
+      <if test="roomid != null" >
+        roomID = #{roomid,jdbcType=BIGINT},
+      </if>
+      <if test="creationdate != null" >
+        creationDate = #{creationdate,jdbcType=CHAR},
+      </if>
+      <if test="modificationdate != null" >
+        modificationDate = #{modificationdate,jdbcType=CHAR},
+      </if>
+      <if test="naturalname != null" >
+        naturalName = #{naturalname,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="lockeddate != null" >
+        lockedDate = #{lockeddate,jdbcType=CHAR},
+      </if>
+      <if test="emptydate != null" >
+        emptyDate = #{emptydate,jdbcType=CHAR},
+      </if>
+      <if test="canchangesubject != null" >
+        canChangeSubject = #{canchangesubject,jdbcType=TINYINT},
+      </if>
+      <if test="maxusers != null" >
+        maxUsers = #{maxusers,jdbcType=INTEGER},
+      </if>
+      <if test="publicroom != null" >
+        publicRoom = #{publicroom,jdbcType=TINYINT},
+      </if>
+      <if test="moderated != null" >
+        moderated = #{moderated,jdbcType=TINYINT},
+      </if>
+      <if test="membersonly != null" >
+        membersOnly = #{membersonly,jdbcType=TINYINT},
+      </if>
+      <if test="caninvite != null" >
+        canInvite = #{caninvite,jdbcType=TINYINT},
+      </if>
+      <if test="roompassword != null" >
+        roomPassword = #{roompassword,jdbcType=VARCHAR},
+      </if>
+      <if test="candiscoverjid != null" >
+        canDiscoverJID = #{candiscoverjid,jdbcType=TINYINT},
+      </if>
+      <if test="logenabled != null" >
+        logEnabled = #{logenabled,jdbcType=TINYINT},
+      </if>
+      <if test="subject != null" >
+        subject = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="rolestobroadcast != null" >
+        rolesToBroadcast = #{rolestobroadcast,jdbcType=TINYINT},
+      </if>
+      <if test="usereservednick != null" >
+        useReservedNick = #{usereservednick,jdbcType=TINYINT},
+      </if>
+      <if test="canchangenick != null" >
+        canChangeNick = #{canchangenick,jdbcType=TINYINT},
+      </if>
+      <if test="canregister != null" >
+        canRegister = #{canregister,jdbcType=TINYINT},
+      </if>
+      <if test="routeid != null" >
+        ROUTEID = #{routeid,jdbcType=INTEGER},
+      </if>
+      <if test="userid != null" >
+        userId = #{userid,jdbcType=VARCHAR},
+      </if>
+      <if test="begintime != null" >
+        begintime = #{begintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        endtime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="creator != null" >
+        CREATOR = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastupdatetime != null" >
+        lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reporttime != null" >
+        reporttime = #{reporttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="schedule != null" >
+        schedule = #{schedule,jdbcType=BINARY},
+      </if>
+      <if test="circlereport != null" >
+        circlereport = #{circlereport,jdbcType=BINARY},
+      </if>
+      <if test="tourists != null" >
+        TOURISTS = #{tourists,jdbcType=BINARY},
+      </if>
+    </set>
+    where serviceID = #{serviceid,jdbcType=BIGINT}
+      and name = #{name,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="hdvon.model.OfMucRoomWithBLOBs" >
+    update ofmucroom
+    set roomID = #{roomid,jdbcType=BIGINT},
+      creationDate = #{creationdate,jdbcType=CHAR},
+      modificationDate = #{modificationdate,jdbcType=CHAR},
+      naturalName = #{naturalname,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      lockedDate = #{lockeddate,jdbcType=CHAR},
+      emptyDate = #{emptydate,jdbcType=CHAR},
+      canChangeSubject = #{canchangesubject,jdbcType=TINYINT},
+      maxUsers = #{maxusers,jdbcType=INTEGER},
+      publicRoom = #{publicroom,jdbcType=TINYINT},
+      moderated = #{moderated,jdbcType=TINYINT},
+      membersOnly = #{membersonly,jdbcType=TINYINT},
+      canInvite = #{caninvite,jdbcType=TINYINT},
+      roomPassword = #{roompassword,jdbcType=VARCHAR},
+      canDiscoverJID = #{candiscoverjid,jdbcType=TINYINT},
+      logEnabled = #{logenabled,jdbcType=TINYINT},
+      subject = #{subject,jdbcType=VARCHAR},
+      rolesToBroadcast = #{rolestobroadcast,jdbcType=TINYINT},
+      useReservedNick = #{usereservednick,jdbcType=TINYINT},
+      canChangeNick = #{canchangenick,jdbcType=TINYINT},
+      canRegister = #{canregister,jdbcType=TINYINT},
+      ROUTEID = #{routeid,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=VARCHAR},
+      begintime = #{begintime,jdbcType=TIMESTAMP},
+      endtime = #{endtime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      CREATOR = #{creator,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      reporttime = #{reporttime,jdbcType=TIMESTAMP},
+      schedule = #{schedule,jdbcType=BINARY},
+      circlereport = #{circlereport,jdbcType=BINARY},
+      TOURISTS = #{tourists,jdbcType=BINARY}
+    where serviceID = #{serviceid,jdbcType=BIGINT}
+      and name = #{name,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hdvon.model.OfMucRoom" >
+    update ofmucroom
+    set roomID = #{roomid,jdbcType=BIGINT},
+      creationDate = #{creationdate,jdbcType=CHAR},
+      modificationDate = #{modificationdate,jdbcType=CHAR},
+      naturalName = #{naturalname,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      lockedDate = #{lockeddate,jdbcType=CHAR},
+      emptyDate = #{emptydate,jdbcType=CHAR},
+      canChangeSubject = #{canchangesubject,jdbcType=TINYINT},
+      maxUsers = #{maxusers,jdbcType=INTEGER},
+      publicRoom = #{publicroom,jdbcType=TINYINT},
+      moderated = #{moderated,jdbcType=TINYINT},
+      membersOnly = #{membersonly,jdbcType=TINYINT},
+      canInvite = #{caninvite,jdbcType=TINYINT},
+      roomPassword = #{roompassword,jdbcType=VARCHAR},
+      canDiscoverJID = #{candiscoverjid,jdbcType=TINYINT},
+      logEnabled = #{logenabled,jdbcType=TINYINT},
+      subject = #{subject,jdbcType=VARCHAR},
+      rolesToBroadcast = #{rolestobroadcast,jdbcType=TINYINT},
+      useReservedNick = #{usereservednick,jdbcType=TINYINT},
+      canChangeNick = #{canchangenick,jdbcType=TINYINT},
+      canRegister = #{canregister,jdbcType=TINYINT},
+      ROUTEID = #{routeid,jdbcType=INTEGER},
+      userId = #{userid,jdbcType=VARCHAR},
+      begintime = #{begintime,jdbcType=TIMESTAMP},
+      endtime = #{endtime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      CREATOR = #{creator,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      reporttime = #{reporttime,jdbcType=TIMESTAMP}
+    where serviceID = #{serviceid,jdbcType=BIGINT}
+      and name = #{name,jdbcType=VARCHAR}
+  </update>
+</mapper>
