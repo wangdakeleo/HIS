@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.OfMucServicePropMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.OfMucServiceProp" >
+    <id column="serviceID" property="serviceid" jdbcType="BIGINT" />
+    <id column="name" property="name" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="hdvon.model.OfMucServiceProp" extends="BaseResultMap" >
+    <result column="propValue" property="propvalue" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    serviceID, name
+  </sql>
+  <sql id="Blob_Column_List" >
+    propValue
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="hdvon.model.OfMucServicePropKey" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ofmucserviceprop
+    where serviceID = #{serviceid,jdbcType=BIGINT}
+      and name = #{name,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="hdvon.model.OfMucServicePropKey" >
+    delete from ofmucserviceprop
+    where serviceID = #{serviceid,jdbcType=BIGINT}
+      and name = #{name,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="hdvon.model.OfMucServiceProp" >
+    insert into ofmucserviceprop (serviceID, name, propValue
+      )
+    values (#{serviceid,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{propvalue,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.OfMucServiceProp" >
+    insert into ofmucserviceprop
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serviceid != null" >
+        serviceID,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="propvalue != null" >
+        propValue,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serviceid != null" >
+        #{serviceid,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="propvalue != null" >
+        #{propvalue,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hdvon.model.OfMucServiceProp" >
+    update ofmucserviceprop
+    <set >
+      <if test="propvalue != null" >
+        propValue = #{propvalue,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where serviceID = #{serviceid,jdbcType=BIGINT}
+      and name = #{name,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="hdvon.model.OfMucServiceProp" >
+    update ofmucserviceprop
+    set propValue = #{propvalue,jdbcType=LONGVARCHAR}
+    where serviceID = #{serviceid,jdbcType=BIGINT}
+      and name = #{name,jdbcType=VARCHAR}
+  </update>
+</mapper>

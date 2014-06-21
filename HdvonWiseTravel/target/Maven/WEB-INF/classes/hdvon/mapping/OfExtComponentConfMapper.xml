@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.OfExtComponentConfMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.OfExtComponentConf" >
+    <id column="subdomain" property="subdomain" jdbcType="VARCHAR" />
+    <result column="wildcard" property="wildcard" jdbcType="TINYINT" />
+    <result column="secret" property="secret" jdbcType="VARCHAR" />
+    <result column="permission" property="permission" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    subdomain, wildcard, secret, permission
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ofextcomponentconf
+    where subdomain = #{subdomain,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ofextcomponentconf
+    where subdomain = #{subdomain,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="hdvon.model.OfExtComponentConf" >
+    insert into ofextcomponentconf (subdomain, wildcard, secret, 
+      permission)
+    values (#{subdomain,jdbcType=VARCHAR}, #{wildcard,jdbcType=TINYINT}, #{secret,jdbcType=VARCHAR}, 
+      #{permission,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.OfExtComponentConf" >
+    insert into ofextcomponentconf
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="subdomain != null" >
+        subdomain,
+      </if>
+      <if test="wildcard != null" >
+        wildcard,
+      </if>
+      <if test="secret != null" >
+        secret,
+      </if>
+      <if test="permission != null" >
+        permission,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="subdomain != null" >
+        #{subdomain,jdbcType=VARCHAR},
+      </if>
+      <if test="wildcard != null" >
+        #{wildcard,jdbcType=TINYINT},
+      </if>
+      <if test="secret != null" >
+        #{secret,jdbcType=VARCHAR},
+      </if>
+      <if test="permission != null" >
+        #{permission,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hdvon.model.OfExtComponentConf" >
+    update ofextcomponentconf
+    <set >
+      <if test="wildcard != null" >
+        wildcard = #{wildcard,jdbcType=TINYINT},
+      </if>
+      <if test="secret != null" >
+        secret = #{secret,jdbcType=VARCHAR},
+      </if>
+      <if test="permission != null" >
+        permission = #{permission,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where subdomain = #{subdomain,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hdvon.model.OfExtComponentConf" >
+    update ofextcomponentconf
+    set wildcard = #{wildcard,jdbcType=TINYINT},
+      secret = #{secret,jdbcType=VARCHAR},
+      permission = #{permission,jdbcType=VARCHAR}
+    where subdomain = #{subdomain,jdbcType=VARCHAR}
+  </update>
+</mapper>

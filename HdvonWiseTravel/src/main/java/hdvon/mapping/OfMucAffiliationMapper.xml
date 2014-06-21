@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.OfMucAffiliationMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.OfMucAffiliation" >
+    <id column="roomID" property="roomid" jdbcType="BIGINT" />
+    <id column="jid" property="jid" jdbcType="LONGVARCHAR" />
+    <result column="affiliation" property="affiliation" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    roomID, jid, affiliation
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="hdvon.model.OfMucAffiliationKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from ofmucaffiliation
+    where roomID = #{roomid,jdbcType=BIGINT}
+      and jid = #{jid,jdbcType=LONGVARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="hdvon.model.OfMucAffiliationKey" >
+    delete from ofmucaffiliation
+    where roomID = #{roomid,jdbcType=BIGINT}
+      and jid = #{jid,jdbcType=LONGVARCHAR}
+  </delete>
+  <insert id="insert" parameterType="hdvon.model.OfMucAffiliation" >
+    insert into ofmucaffiliation (roomID, jid, affiliation
+      )
+    values (#{roomid,jdbcType=BIGINT}, #{jid,jdbcType=LONGVARCHAR}, #{affiliation,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.OfMucAffiliation" >
+    insert into ofmucaffiliation
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roomid != null" >
+        roomID,
+      </if>
+      <if test="jid != null" >
+        jid,
+      </if>
+      <if test="affiliation != null" >
+        affiliation,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roomid != null" >
+        #{roomid,jdbcType=BIGINT},
+      </if>
+      <if test="jid != null" >
+        #{jid,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="affiliation != null" >
+        #{affiliation,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hdvon.model.OfMucAffiliation" >
+    update ofmucaffiliation
+    <set >
+      <if test="affiliation != null" >
+        affiliation = #{affiliation,jdbcType=TINYINT},
+      </if>
+    </set>
+    where roomID = #{roomid,jdbcType=BIGINT}
+      and jid = #{jid,jdbcType=LONGVARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hdvon.model.OfMucAffiliation" >
+    update ofmucaffiliation
+    set affiliation = #{affiliation,jdbcType=TINYINT}
+    where roomID = #{roomid,jdbcType=BIGINT}
+      and jid = #{jid,jdbcType=LONGVARCHAR}
+  </update>
+</mapper>

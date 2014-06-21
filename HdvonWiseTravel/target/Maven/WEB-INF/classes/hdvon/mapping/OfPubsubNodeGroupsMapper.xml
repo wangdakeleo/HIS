@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.OfPubsubNodeGroupsMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.OfPubsubNodeGroups" >
+    <result column="serviceID" property="serviceid" jdbcType="VARCHAR" />
+    <result column="nodeID" property="nodeid" jdbcType="VARCHAR" />
+    <result column="rosterGroup" property="rostergroup" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="hdvon.model.OfPubsubNodeGroups" >
+    insert into ofpubsubnodegroups (serviceID, nodeID, rosterGroup
+      )
+    values (#{serviceid,jdbcType=VARCHAR}, #{nodeid,jdbcType=VARCHAR}, #{rostergroup,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.OfPubsubNodeGroups" >
+    insert into ofpubsubnodegroups
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serviceid != null" >
+        serviceID,
+      </if>
+      <if test="nodeid != null" >
+        nodeID,
+      </if>
+      <if test="rostergroup != null" >
+        rosterGroup,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serviceid != null" >
+        #{serviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeid != null" >
+        #{nodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="rostergroup != null" >
+        #{rostergroup,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.HlQuestionItemsMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.HlQuestionItems" >
+    <result column="JUDGEID" property="judgeid" jdbcType="VARCHAR" />
+    <result column="ITEMID" property="itemid" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="hdvon.model.HlQuestionItems" >
+    insert into hl_questionitems (JUDGEID, ITEMID)
+    values (#{judgeid,jdbcType=VARCHAR}, #{itemid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.HlQuestionItems" >
+    insert into hl_questionitems
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="judgeid != null" >
+        JUDGEID,
+      </if>
+      <if test="itemid != null" >
+        ITEMID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="judgeid != null" >
+        #{judgeid,jdbcType=VARCHAR},
+      </if>
+      <if test="itemid != null" >
+        #{itemid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

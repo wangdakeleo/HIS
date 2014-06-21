@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.HlScenicMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.HlScenic" >
+    <id column="SCENICID" property="scenicid" jdbcType="VARCHAR" />
+    <result column="SCENICNAME" property="scenicname" jdbcType="VARCHAR" />
+    <result column="ENTID" property="entid" jdbcType="VARCHAR" />
+    <result column="SCENICAREA" property="scenicarea" jdbcType="VARCHAR" />
+    <result column="SCENICMAP" property="scenicmap" jdbcType="VARCHAR" />
+    <result column="MAPINFO" property="mapinfo" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="lastUpdateTime" property="lastupdatetime" jdbcType="TIMESTAMP" />
+    <result column="RECOMMANDPATH" property="recommandpath" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="hdvon.model.HlScenic" extends="BaseResultMap" >
+    <result column="RECOMMAND" property="recommand" jdbcType="BINARY" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SCENICID, SCENICNAME, ENTID, SCENICAREA, SCENICMAP, MAPINFO, status, creator, createtime, 
+    lastUpdateTime, RECOMMANDPATH
+  </sql>
+  <sql id="Blob_Column_List" >
+    RECOMMAND
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from hl_scenic
+    where SCENICID = #{scenicid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from hl_scenic
+    where SCENICID = #{scenicid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="hdvon.model.HlScenic" >
+    insert into hl_scenic (SCENICID, SCENICNAME, ENTID, 
+      SCENICAREA, SCENICMAP, MAPINFO, 
+      status, creator, createtime, 
+      lastUpdateTime, RECOMMANDPATH, RECOMMAND
+      )
+    values (#{scenicid,jdbcType=VARCHAR}, #{scenicname,jdbcType=VARCHAR}, #{entid,jdbcType=VARCHAR}, 
+      #{scenicarea,jdbcType=VARCHAR}, #{scenicmap,jdbcType=VARCHAR}, #{mapinfo,jdbcType=VARCHAR}, 
+      #{status,jdbcType=TINYINT}, #{creator,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{lastupdatetime,jdbcType=TIMESTAMP}, #{recommandpath,jdbcType=VARCHAR}, #{recommand,jdbcType=BINARY}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.HlScenic" >
+    insert into hl_scenic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="scenicid != null" >
+        SCENICID,
+      </if>
+      <if test="scenicname != null" >
+        SCENICNAME,
+      </if>
+      <if test="entid != null" >
+        ENTID,
+      </if>
+      <if test="scenicarea != null" >
+        SCENICAREA,
+      </if>
+      <if test="scenicmap != null" >
+        SCENICMAP,
+      </if>
+      <if test="mapinfo != null" >
+        MAPINFO,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="lastupdatetime != null" >
+        lastUpdateTime,
+      </if>
+      <if test="recommandpath != null" >
+        RECOMMANDPATH,
+      </if>
+      <if test="recommand != null" >
+        RECOMMAND,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="scenicid != null" >
+        #{scenicid,jdbcType=VARCHAR},
+      </if>
+      <if test="scenicname != null" >
+        #{scenicname,jdbcType=VARCHAR},
+      </if>
+      <if test="entid != null" >
+        #{entid,jdbcType=VARCHAR},
+      </if>
+      <if test="scenicarea != null" >
+        #{scenicarea,jdbcType=VARCHAR},
+      </if>
+      <if test="scenicmap != null" >
+        #{scenicmap,jdbcType=VARCHAR},
+      </if>
+      <if test="mapinfo != null" >
+        #{mapinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastupdatetime != null" >
+        #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recommandpath != null" >
+        #{recommandpath,jdbcType=VARCHAR},
+      </if>
+      <if test="recommand != null" >
+        #{recommand,jdbcType=BINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hdvon.model.HlScenic" >
+    update hl_scenic
+    <set >
+      <if test="scenicname != null" >
+        SCENICNAME = #{scenicname,jdbcType=VARCHAR},
+      </if>
+      <if test="entid != null" >
+        ENTID = #{entid,jdbcType=VARCHAR},
+      </if>
+      <if test="scenicarea != null" >
+        SCENICAREA = #{scenicarea,jdbcType=VARCHAR},
+      </if>
+      <if test="scenicmap != null" >
+        SCENICMAP = #{scenicmap,jdbcType=VARCHAR},
+      </if>
+      <if test="mapinfo != null" >
+        MAPINFO = #{mapinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastupdatetime != null" >
+        lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recommandpath != null" >
+        RECOMMANDPATH = #{recommandpath,jdbcType=VARCHAR},
+      </if>
+      <if test="recommand != null" >
+        RECOMMAND = #{recommand,jdbcType=BINARY},
+      </if>
+    </set>
+    where SCENICID = #{scenicid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="hdvon.model.HlScenic" >
+    update hl_scenic
+    set SCENICNAME = #{scenicname,jdbcType=VARCHAR},
+      ENTID = #{entid,jdbcType=VARCHAR},
+      SCENICAREA = #{scenicarea,jdbcType=VARCHAR},
+      SCENICMAP = #{scenicmap,jdbcType=VARCHAR},
+      MAPINFO = #{mapinfo,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      creator = #{creator,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      RECOMMANDPATH = #{recommandpath,jdbcType=VARCHAR},
+      RECOMMAND = #{recommand,jdbcType=BINARY}
+    where SCENICID = #{scenicid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hdvon.model.HlScenic" >
+    update hl_scenic
+    set SCENICNAME = #{scenicname,jdbcType=VARCHAR},
+      ENTID = #{entid,jdbcType=VARCHAR},
+      SCENICAREA = #{scenicarea,jdbcType=VARCHAR},
+      SCENICMAP = #{scenicmap,jdbcType=VARCHAR},
+      MAPINFO = #{mapinfo,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      creator = #{creator,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      RECOMMANDPATH = #{recommandpath,jdbcType=VARCHAR}
+    where SCENICID = #{scenicid,jdbcType=VARCHAR}
+  </update>
+</mapper>

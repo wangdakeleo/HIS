@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.OfGroupUserMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.OfGroupUserKey" >
+    <id column="groupName" property="groupname" jdbcType="VARCHAR" />
+    <id column="username" property="username" jdbcType="VARCHAR" />
+    <id column="administrator" property="administrator" jdbcType="TINYINT" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="hdvon.model.OfGroupUserKey" >
+    delete from ofgroupuser
+    where groupName = #{groupname,jdbcType=VARCHAR}
+      and username = #{username,jdbcType=VARCHAR}
+      and administrator = #{administrator,jdbcType=TINYINT}
+  </delete>
+  <insert id="insert" parameterType="hdvon.model.OfGroupUserKey" >
+    insert into ofgroupuser (groupName, username, administrator
+      )
+    values (#{groupname,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{administrator,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.OfGroupUserKey" >
+    insert into ofgroupuser
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="groupname != null" >
+        groupName,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="administrator != null" >
+        administrator,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="groupname != null" >
+        #{groupname,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="administrator != null" >
+        #{administrator,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>

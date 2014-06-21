@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.HlBusinessCouponMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.HlBusinessCoupon" >
+    <result column="BUSINESSID" property="businessid" jdbcType="VARCHAR" />
+    <result column="COUPONID" property="couponid" jdbcType="VARCHAR" />
+    <result column="COUPONNAME" property="couponname" jdbcType="VARCHAR" />
+    <result column="BEGINTIME" property="begintime" jdbcType="TIMESTAMP" />
+    <result column="ENDTIME" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="lastUpdateTime" property="lastupdatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="hdvon.model.HlBusinessCouponWithBLOBs" extends="BaseResultMap" >
+    <result column="DESCRIPTION" property="description" jdbcType="BINARY" />
+    <result column="PICTURE" property="picture" jdbcType="BINARY" />
+  </resultMap>
+  <sql id="Blob_Column_List" >
+    DESCRIPTION, PICTURE
+  </sql>
+  <insert id="insert" parameterType="hdvon.model.HlBusinessCouponWithBLOBs" >
+    insert into hl_businesscoupon (BUSINESSID, COUPONID, COUPONNAME, 
+      BEGINTIME, ENDTIME, status, 
+      creator, CREATETIME, lastUpdateTime, 
+      DESCRIPTION, PICTURE)
+    values (#{businessid,jdbcType=VARCHAR}, #{couponid,jdbcType=VARCHAR}, #{couponname,jdbcType=VARCHAR}, 
+      #{begintime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, 
+      #{creator,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{lastupdatetime,jdbcType=TIMESTAMP}, 
+      #{description,jdbcType=BINARY}, #{picture,jdbcType=BINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.HlBusinessCouponWithBLOBs" >
+    insert into hl_businesscoupon
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="businessid != null" >
+        BUSINESSID,
+      </if>
+      <if test="couponid != null" >
+        COUPONID,
+      </if>
+      <if test="couponname != null" >
+        COUPONNAME,
+      </if>
+      <if test="begintime != null" >
+        BEGINTIME,
+      </if>
+      <if test="endtime != null" >
+        ENDTIME,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="lastupdatetime != null" >
+        lastUpdateTime,
+      </if>
+      <if test="description != null" >
+        DESCRIPTION,
+      </if>
+      <if test="picture != null" >
+        PICTURE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="businessid != null" >
+        #{businessid,jdbcType=VARCHAR},
+      </if>
+      <if test="couponid != null" >
+        #{couponid,jdbcType=VARCHAR},
+      </if>
+      <if test="couponname != null" >
+        #{couponname,jdbcType=VARCHAR},
+      </if>
+      <if test="begintime != null" >
+        #{begintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastupdatetime != null" >
+        #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=BINARY},
+      </if>
+      <if test="picture != null" >
+        #{picture,jdbcType=BINARY},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.HlOrderMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.HlOrder" >
+    <result column="ORDERID" property="orderid" jdbcType="VARCHAR" />
+    <result column="ORDERCODE" property="ordercode" jdbcType="VARCHAR" />
+    <result column="HL__ENTID" property="hlEntid" jdbcType="VARCHAR" />
+    <result column="PRODUCTID" property="productid" jdbcType="VARCHAR" />
+    <result column="BUSINESSID" property="businessid" jdbcType="VARCHAR" />
+    <result column="ORDERTIME" property="ordertime" jdbcType="TIMESTAMP" />
+    <result column="CHECKTIME" property="checktime" jdbcType="TIMESTAMP" />
+    <result column="EFFECTTIME" property="effecttime" jdbcType="TIMESTAMP" />
+    <result column="BEGINTIME" property="begintime" jdbcType="TIMESTAMP" />
+    <result column="ENDTIME" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="PRODUCTCOUNT" property="productcount" jdbcType="INTEGER" />
+    <result column="AMOUNT" property="amount" jdbcType="DECIMAL" />
+    <result column="CREATOR" property="creator" jdbcType="VARCHAR" />
+    <result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="lastupdator" property="lastupdator" jdbcType="VARCHAR" />
+    <result column="LASTUPDATETIME" property="lastupdatetime" jdbcType="TIMESTAMP" />
+    <result column="OrderStatus" property="orderstatus" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert" parameterType="hdvon.model.HlOrder" >
+    insert into hl_order (ORDERID, ORDERCODE, HL__ENTID, 
+      PRODUCTID, BUSINESSID, ORDERTIME, 
+      CHECKTIME, EFFECTTIME, BEGINTIME, 
+      ENDTIME, PRODUCTCOUNT, AMOUNT, 
+      CREATOR, CREATETIME, lastupdator, 
+      LASTUPDATETIME, OrderStatus)
+    values (#{orderid,jdbcType=VARCHAR}, #{ordercode,jdbcType=VARCHAR}, #{hlEntid,jdbcType=VARCHAR}, 
+      #{productid,jdbcType=VARCHAR}, #{businessid,jdbcType=VARCHAR}, #{ordertime,jdbcType=TIMESTAMP}, 
+      #{checktime,jdbcType=TIMESTAMP}, #{effecttime,jdbcType=TIMESTAMP}, #{begintime,jdbcType=TIMESTAMP}, 
+      #{endtime,jdbcType=TIMESTAMP}, #{productcount,jdbcType=INTEGER}, #{amount,jdbcType=DECIMAL}, 
+      #{creator,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{lastupdator,jdbcType=VARCHAR}, 
+      #{lastupdatetime,jdbcType=TIMESTAMP}, #{orderstatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.HlOrder" >
+    insert into hl_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderid != null" >
+        ORDERID,
+      </if>
+      <if test="ordercode != null" >
+        ORDERCODE,
+      </if>
+      <if test="hlEntid != null" >
+        HL__ENTID,
+      </if>
+      <if test="productid != null" >
+        PRODUCTID,
+      </if>
+      <if test="businessid != null" >
+        BUSINESSID,
+      </if>
+      <if test="ordertime != null" >
+        ORDERTIME,
+      </if>
+      <if test="checktime != null" >
+        CHECKTIME,
+      </if>
+      <if test="effecttime != null" >
+        EFFECTTIME,
+      </if>
+      <if test="begintime != null" >
+        BEGINTIME,
+      </if>
+      <if test="endtime != null" >
+        ENDTIME,
+      </if>
+      <if test="productcount != null" >
+        PRODUCTCOUNT,
+      </if>
+      <if test="amount != null" >
+        AMOUNT,
+      </if>
+      <if test="creator != null" >
+        CREATOR,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="lastupdator != null" >
+        lastupdator,
+      </if>
+      <if test="lastupdatetime != null" >
+        LASTUPDATETIME,
+      </if>
+      <if test="orderstatus != null" >
+        OrderStatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderid != null" >
+        #{orderid,jdbcType=VARCHAR},
+      </if>
+      <if test="ordercode != null" >
+        #{ordercode,jdbcType=VARCHAR},
+      </if>
+      <if test="hlEntid != null" >
+        #{hlEntid,jdbcType=VARCHAR},
+      </if>
+      <if test="productid != null" >
+        #{productid,jdbcType=VARCHAR},
+      </if>
+      <if test="businessid != null" >
+        #{businessid,jdbcType=VARCHAR},
+      </if>
+      <if test="ordertime != null" >
+        #{ordertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checktime != null" >
+        #{checktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="effecttime != null" >
+        #{effecttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="begintime != null" >
+        #{begintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productcount != null" >
+        #{productcount,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastupdator != null" >
+        #{lastupdator,jdbcType=VARCHAR},
+      </if>
+      <if test="lastupdatetime != null" >
+        #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderstatus != null" >
+        #{orderstatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

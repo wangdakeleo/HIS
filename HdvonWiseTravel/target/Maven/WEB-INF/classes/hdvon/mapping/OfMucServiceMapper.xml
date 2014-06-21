@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.OfMucServiceMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.OfMucService" >
+    <id column="subdomain" property="subdomain" jdbcType="VARCHAR" />
+    <result column="serviceID" property="serviceid" jdbcType="BIGINT" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="isHidden" property="ishidden" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    subdomain, serviceID, description, isHidden
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ofmucservice
+    where subdomain = #{subdomain,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ofmucservice
+    where subdomain = #{subdomain,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="hdvon.model.OfMucService" >
+    insert into ofmucservice (subdomain, serviceID, description, 
+      isHidden)
+    values (#{subdomain,jdbcType=VARCHAR}, #{serviceid,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, 
+      #{ishidden,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.OfMucService" >
+    insert into ofmucservice
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="subdomain != null" >
+        subdomain,
+      </if>
+      <if test="serviceid != null" >
+        serviceID,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="ishidden != null" >
+        isHidden,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="subdomain != null" >
+        #{subdomain,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceid != null" >
+        #{serviceid,jdbcType=BIGINT},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="ishidden != null" >
+        #{ishidden,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hdvon.model.OfMucService" >
+    update ofmucservice
+    <set >
+      <if test="serviceid != null" >
+        serviceID = #{serviceid,jdbcType=BIGINT},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="ishidden != null" >
+        isHidden = #{ishidden,jdbcType=TINYINT},
+      </if>
+    </set>
+    where subdomain = #{subdomain,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hdvon.model.OfMucService" >
+    update ofmucservice
+    set serviceID = #{serviceid,jdbcType=BIGINT},
+      description = #{description,jdbcType=VARCHAR},
+      isHidden = #{ishidden,jdbcType=TINYINT}
+    where subdomain = #{subdomain,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.HlUserMapInfoMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.HlUserMapInfo" >
+    <id column="mapid" property="mapid" jdbcType="VARCHAR" />
+    <result column="mapinfo" property="mapinfo" jdbcType="VARCHAR" />
+    <result column="roomID" property="roomid" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="lastUpdateTime" property="lastupdatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    mapid, mapinfo, roomID, username, createtime, lastUpdateTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from hl_usermapinfo
+    where mapid = #{mapid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from hl_usermapinfo
+    where mapid = #{mapid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="hdvon.model.HlUserMapInfo" >
+    insert into hl_usermapinfo (mapid, mapinfo, roomID, 
+      username, createtime, lastUpdateTime
+      )
+    values (#{mapid,jdbcType=VARCHAR}, #{mapinfo,jdbcType=VARCHAR}, #{roomid,jdbcType=INTEGER}, 
+      #{username,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{lastupdatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.HlUserMapInfo" >
+    insert into hl_usermapinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mapid != null" >
+        mapid,
+      </if>
+      <if test="mapinfo != null" >
+        mapinfo,
+      </if>
+      <if test="roomid != null" >
+        roomID,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="lastupdatetime != null" >
+        lastUpdateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mapid != null" >
+        #{mapid,jdbcType=VARCHAR},
+      </if>
+      <if test="mapinfo != null" >
+        #{mapinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="roomid != null" >
+        #{roomid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastupdatetime != null" >
+        #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hdvon.model.HlUserMapInfo" >
+    update hl_usermapinfo
+    <set >
+      <if test="mapinfo != null" >
+        mapinfo = #{mapinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="roomid != null" >
+        roomID = #{roomid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastupdatetime != null" >
+        lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where mapid = #{mapid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hdvon.model.HlUserMapInfo" >
+    update hl_usermapinfo
+    set mapinfo = #{mapinfo,jdbcType=VARCHAR},
+      roomID = #{roomid,jdbcType=INTEGER},
+      username = #{username,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP}
+    where mapid = #{mapid,jdbcType=VARCHAR}
+  </update>
+</mapper>

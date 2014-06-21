@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.HlRouteScenicMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.HlRouteScenic" >
+    <result column="ROUTEID" property="routeid" jdbcType="VARCHAR" />
+    <result column="SCENICID" property="scenicid" jdbcType="VARCHAR" />
+    <result column="ORDERNUM" property="ordernum" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert" parameterType="hdvon.model.HlRouteScenic" >
+    insert into hl_routescenic (ROUTEID, SCENICID, ORDERNUM
+      )
+    values (#{routeid,jdbcType=VARCHAR}, #{scenicid,jdbcType=VARCHAR}, #{ordernum,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.HlRouteScenic" >
+    insert into hl_routescenic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="routeid != null" >
+        ROUTEID,
+      </if>
+      <if test="scenicid != null" >
+        SCENICID,
+      </if>
+      <if test="ordernum != null" >
+        ORDERNUM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="routeid != null" >
+        #{routeid,jdbcType=VARCHAR},
+      </if>
+      <if test="scenicid != null" >
+        #{scenicid,jdbcType=VARCHAR},
+      </if>
+      <if test="ordernum != null" >
+        #{ordernum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

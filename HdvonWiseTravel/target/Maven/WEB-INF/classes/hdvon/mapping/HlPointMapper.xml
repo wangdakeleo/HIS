@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.HlPointMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.HlPoint" >
+    <id column="POINTID" property="pointid" jdbcType="VARCHAR" />
+    <result column="POINTNAME" property="pointname" jdbcType="VARCHAR" />
+    <result column="SCENICID" property="scenicid" jdbcType="VARCHAR" />
+    <result column="ENTID" property="entid" jdbcType="VARCHAR" />
+    <result column="POINTDESC" property="pointdesc" jdbcType="VARCHAR" />
+    <result column="POINTPICTURE" property="pointpicture" jdbcType="VARCHAR" />
+    <result column="MAPINFO" property="mapinfo" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="creator" property="creator" jdbcType="VARCHAR" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="lastUpdateTime" property="lastupdatetime" jdbcType="TIMESTAMP" />
+    <result column="RecomandPath" property="recomandpath" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="hdvon.model.HlPoint" extends="BaseResultMap" >
+    <result column="RECOMMAND" property="recommand" jdbcType="BINARY" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    POINTID, POINTNAME, SCENICID, ENTID, POINTDESC, POINTPICTURE, MAPINFO, status, creator, 
+    createtime, lastUpdateTime, RecomandPath
+  </sql>
+  <sql id="Blob_Column_List" >
+    RECOMMAND
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from hl_point
+    where POINTID = #{pointid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from hl_point
+    where POINTID = #{pointid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="hdvon.model.HlPoint" >
+    insert into hl_point (POINTID, POINTNAME, SCENICID, 
+      ENTID, POINTDESC, POINTPICTURE, 
+      MAPINFO, status, creator, 
+      createtime, lastUpdateTime, RecomandPath, 
+      RECOMMAND)
+    values (#{pointid,jdbcType=VARCHAR}, #{pointname,jdbcType=VARCHAR}, #{scenicid,jdbcType=VARCHAR}, 
+      #{entid,jdbcType=VARCHAR}, #{pointdesc,jdbcType=VARCHAR}, #{pointpicture,jdbcType=VARCHAR}, 
+      #{mapinfo,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{creator,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{lastupdatetime,jdbcType=TIMESTAMP}, #{recomandpath,jdbcType=VARCHAR}, 
+      #{recommand,jdbcType=BINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.HlPoint" >
+    insert into hl_point
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pointid != null" >
+        POINTID,
+      </if>
+      <if test="pointname != null" >
+        POINTNAME,
+      </if>
+      <if test="scenicid != null" >
+        SCENICID,
+      </if>
+      <if test="entid != null" >
+        ENTID,
+      </if>
+      <if test="pointdesc != null" >
+        POINTDESC,
+      </if>
+      <if test="pointpicture != null" >
+        POINTPICTURE,
+      </if>
+      <if test="mapinfo != null" >
+        MAPINFO,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="creator != null" >
+        creator,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="lastupdatetime != null" >
+        lastUpdateTime,
+      </if>
+      <if test="recomandpath != null" >
+        RecomandPath,
+      </if>
+      <if test="recommand != null" >
+        RECOMMAND,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pointid != null" >
+        #{pointid,jdbcType=VARCHAR},
+      </if>
+      <if test="pointname != null" >
+        #{pointname,jdbcType=VARCHAR},
+      </if>
+      <if test="scenicid != null" >
+        #{scenicid,jdbcType=VARCHAR},
+      </if>
+      <if test="entid != null" >
+        #{entid,jdbcType=VARCHAR},
+      </if>
+      <if test="pointdesc != null" >
+        #{pointdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="pointpicture != null" >
+        #{pointpicture,jdbcType=VARCHAR},
+      </if>
+      <if test="mapinfo != null" >
+        #{mapinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="creator != null" >
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastupdatetime != null" >
+        #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recomandpath != null" >
+        #{recomandpath,jdbcType=VARCHAR},
+      </if>
+      <if test="recommand != null" >
+        #{recommand,jdbcType=BINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hdvon.model.HlPoint" >
+    update hl_point
+    <set >
+      <if test="pointname != null" >
+        POINTNAME = #{pointname,jdbcType=VARCHAR},
+      </if>
+      <if test="scenicid != null" >
+        SCENICID = #{scenicid,jdbcType=VARCHAR},
+      </if>
+      <if test="entid != null" >
+        ENTID = #{entid,jdbcType=VARCHAR},
+      </if>
+      <if test="pointdesc != null" >
+        POINTDESC = #{pointdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="pointpicture != null" >
+        POINTPICTURE = #{pointpicture,jdbcType=VARCHAR},
+      </if>
+      <if test="mapinfo != null" >
+        MAPINFO = #{mapinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="creator != null" >
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastupdatetime != null" >
+        lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recomandpath != null" >
+        RecomandPath = #{recomandpath,jdbcType=VARCHAR},
+      </if>
+      <if test="recommand != null" >
+        RECOMMAND = #{recommand,jdbcType=BINARY},
+      </if>
+    </set>
+    where POINTID = #{pointid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="hdvon.model.HlPoint" >
+    update hl_point
+    set POINTNAME = #{pointname,jdbcType=VARCHAR},
+      SCENICID = #{scenicid,jdbcType=VARCHAR},
+      ENTID = #{entid,jdbcType=VARCHAR},
+      POINTDESC = #{pointdesc,jdbcType=VARCHAR},
+      POINTPICTURE = #{pointpicture,jdbcType=VARCHAR},
+      MAPINFO = #{mapinfo,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      creator = #{creator,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      RecomandPath = #{recomandpath,jdbcType=VARCHAR},
+      RECOMMAND = #{recommand,jdbcType=BINARY}
+    where POINTID = #{pointid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hdvon.model.HlPoint" >
+    update hl_point
+    set POINTNAME = #{pointname,jdbcType=VARCHAR},
+      SCENICID = #{scenicid,jdbcType=VARCHAR},
+      ENTID = #{entid,jdbcType=VARCHAR},
+      POINTDESC = #{pointdesc,jdbcType=VARCHAR},
+      POINTPICTURE = #{pointpicture,jdbcType=VARCHAR},
+      MAPINFO = #{mapinfo,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      creator = #{creator,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      RecomandPath = #{recomandpath,jdbcType=VARCHAR}
+    where POINTID = #{pointid,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.HlTravelLogInfoMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.HlTravelLogInfo" >
+    <id column="LOGID" property="logid" jdbcType="VARCHAR" />
+    <result column="LOGTITLE" property="logtitle" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="roomID" property="roomid" jdbcType="INTEGER" />
+    <result column="lastUpdateTime" property="lastupdatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="hdvon.model.HlTravelLogInfo" extends="BaseResultMap" >
+    <result column="LOGINFO" property="loginfo" jdbcType="BINARY" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    LOGID, LOGTITLE, username, roomID, lastUpdateTime
+  </sql>
+  <sql id="Blob_Column_List" >
+    LOGINFO
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from hl_travelloginfo
+    where LOGID = #{logid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from hl_travelloginfo
+    where LOGID = #{logid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="hdvon.model.HlTravelLogInfo" >
+    insert into hl_travelloginfo (LOGID, LOGTITLE, username, 
+      roomID, lastUpdateTime, LOGINFO
+      )
+    values (#{logid,jdbcType=VARCHAR}, #{logtitle,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{roomid,jdbcType=INTEGER}, #{lastupdatetime,jdbcType=TIMESTAMP}, #{loginfo,jdbcType=BINARY}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.HlTravelLogInfo" >
+    insert into hl_travelloginfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logid != null" >
+        LOGID,
+      </if>
+      <if test="logtitle != null" >
+        LOGTITLE,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="roomid != null" >
+        roomID,
+      </if>
+      <if test="lastupdatetime != null" >
+        lastUpdateTime,
+      </if>
+      <if test="loginfo != null" >
+        LOGINFO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logid != null" >
+        #{logid,jdbcType=VARCHAR},
+      </if>
+      <if test="logtitle != null" >
+        #{logtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="roomid != null" >
+        #{roomid,jdbcType=INTEGER},
+      </if>
+      <if test="lastupdatetime != null" >
+        #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginfo != null" >
+        #{loginfo,jdbcType=BINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hdvon.model.HlTravelLogInfo" >
+    update hl_travelloginfo
+    <set >
+      <if test="logtitle != null" >
+        LOGTITLE = #{logtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="roomid != null" >
+        roomID = #{roomid,jdbcType=INTEGER},
+      </if>
+      <if test="lastupdatetime != null" >
+        lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginfo != null" >
+        LOGINFO = #{loginfo,jdbcType=BINARY},
+      </if>
+    </set>
+    where LOGID = #{logid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="hdvon.model.HlTravelLogInfo" >
+    update hl_travelloginfo
+    set LOGTITLE = #{logtitle,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      roomID = #{roomid,jdbcType=INTEGER},
+      lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP},
+      LOGINFO = #{loginfo,jdbcType=BINARY}
+    where LOGID = #{logid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hdvon.model.HlTravelLogInfo" >
+    update hl_travelloginfo
+    set LOGTITLE = #{logtitle,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      roomID = #{roomid,jdbcType=INTEGER},
+      lastUpdateTime = #{lastupdatetime,jdbcType=TIMESTAMP}
+    where LOGID = #{logid,jdbcType=VARCHAR}
+  </update>
+</mapper>

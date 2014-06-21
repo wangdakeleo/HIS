@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.OfRosterGroupsMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.OfRosterGroups" >
+    <id column="rosterID" property="rosterid" jdbcType="BIGINT" />
+    <id column="rank" property="rank" jdbcType="TINYINT" />
+    <result column="groupName" property="groupname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    rosterID, rank, groupName
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="hdvon.model.OfRosterGroupsKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from ofrostergroups
+    where rosterID = #{rosterid,jdbcType=BIGINT}
+      and rank = #{rank,jdbcType=TINYINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="hdvon.model.OfRosterGroupsKey" >
+    delete from ofrostergroups
+    where rosterID = #{rosterid,jdbcType=BIGINT}
+      and rank = #{rank,jdbcType=TINYINT}
+  </delete>
+  <insert id="insert" parameterType="hdvon.model.OfRosterGroups" >
+    insert into ofrostergroups (rosterID, rank, groupName
+      )
+    values (#{rosterid,jdbcType=BIGINT}, #{rank,jdbcType=TINYINT}, #{groupname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.OfRosterGroups" >
+    insert into ofrostergroups
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rosterid != null" >
+        rosterID,
+      </if>
+      <if test="rank != null" >
+        rank,
+      </if>
+      <if test="groupname != null" >
+        groupName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rosterid != null" >
+        #{rosterid,jdbcType=BIGINT},
+      </if>
+      <if test="rank != null" >
+        #{rank,jdbcType=TINYINT},
+      </if>
+      <if test="groupname != null" >
+        #{groupname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hdvon.model.OfRosterGroups" >
+    update ofrostergroups
+    <set >
+      <if test="groupname != null" >
+        groupName = #{groupname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where rosterID = #{rosterid,jdbcType=BIGINT}
+      and rank = #{rank,jdbcType=TINYINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hdvon.model.OfRosterGroups" >
+    update ofrostergroups
+    set groupName = #{groupname,jdbcType=VARCHAR}
+    where rosterID = #{rosterid,jdbcType=BIGINT}
+      and rank = #{rank,jdbcType=TINYINT}
+  </update>
+</mapper>

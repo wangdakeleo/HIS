@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.HlBaseResourdeMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.HlBaseResourde" >
+    <id column="RESID" property="resid" jdbcType="VARCHAR" />
+    <result column="RESNAME" property="resname" jdbcType="VARCHAR" />
+    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+    <result column="parentid" property="parentid" jdbcType="VARCHAR" />
+    <result column="resourcetype" property="resourcetype" jdbcType="VARCHAR" />
+    <result column="OrderNum" property="ordernum" jdbcType="REAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    RESID, RESNAME, DESCRIPTION, parentid, resourcetype, OrderNum
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from hl_baseresourde
+    where RESID = #{resid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from hl_baseresourde
+    where RESID = #{resid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="hdvon.model.HlBaseResourde" >
+    insert into hl_baseresourde (RESID, RESNAME, DESCRIPTION, 
+      parentid, resourcetype, OrderNum
+      )
+    values (#{resid,jdbcType=VARCHAR}, #{resname,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{parentid,jdbcType=VARCHAR}, #{resourcetype,jdbcType=VARCHAR}, #{ordernum,jdbcType=REAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.HlBaseResourde" >
+    insert into hl_baseresourde
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="resid != null" >
+        RESID,
+      </if>
+      <if test="resname != null" >
+        RESNAME,
+      </if>
+      <if test="description != null" >
+        DESCRIPTION,
+      </if>
+      <if test="parentid != null" >
+        parentid,
+      </if>
+      <if test="resourcetype != null" >
+        resourcetype,
+      </if>
+      <if test="ordernum != null" >
+        OrderNum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="resid != null" >
+        #{resid,jdbcType=VARCHAR},
+      </if>
+      <if test="resname != null" >
+        #{resname,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=VARCHAR},
+      </if>
+      <if test="resourcetype != null" >
+        #{resourcetype,jdbcType=VARCHAR},
+      </if>
+      <if test="ordernum != null" >
+        #{ordernum,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hdvon.model.HlBaseResourde" >
+    update hl_baseresourde
+    <set >
+      <if test="resname != null" >
+        RESNAME = #{resname,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        parentid = #{parentid,jdbcType=VARCHAR},
+      </if>
+      <if test="resourcetype != null" >
+        resourcetype = #{resourcetype,jdbcType=VARCHAR},
+      </if>
+      <if test="ordernum != null" >
+        OrderNum = #{ordernum,jdbcType=REAL},
+      </if>
+    </set>
+    where RESID = #{resid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hdvon.model.HlBaseResourde" >
+    update hl_baseresourde
+    set RESNAME = #{resname,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      parentid = #{parentid,jdbcType=VARCHAR},
+      resourcetype = #{resourcetype,jdbcType=VARCHAR},
+      OrderNum = #{ordernum,jdbcType=REAL}
+    where RESID = #{resid,jdbcType=VARCHAR}
+  </update>
+</mapper>

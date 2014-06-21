@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.HlJudgeResultMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.HlJudgeResult" >
+    <result column="ITEMID" property="itemid" jdbcType="VARCHAR" />
+    <result column="RoomID" property="roomid" jdbcType="INTEGER" />
+    <result column="VALUEID" property="valueid" jdbcType="VARCHAR" />
+    <result column="JUDGEID" property="judgeid" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="JUDGETIME" property="judgetime" jdbcType="TIMESTAMP" />
+    <result column="lastUpdateTime" property="lastupdatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <insert id="insert" parameterType="hdvon.model.HlJudgeResult" >
+    insert into hl_judgeresult (ITEMID, RoomID, VALUEID, 
+      JUDGEID, username, JUDGETIME, 
+      lastUpdateTime)
+    values (#{itemid,jdbcType=VARCHAR}, #{roomid,jdbcType=INTEGER}, #{valueid,jdbcType=VARCHAR}, 
+      #{judgeid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{judgetime,jdbcType=TIMESTAMP}, 
+      #{lastupdatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.HlJudgeResult" >
+    insert into hl_judgeresult
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="itemid != null" >
+        ITEMID,
+      </if>
+      <if test="roomid != null" >
+        RoomID,
+      </if>
+      <if test="valueid != null" >
+        VALUEID,
+      </if>
+      <if test="judgeid != null" >
+        JUDGEID,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="judgetime != null" >
+        JUDGETIME,
+      </if>
+      <if test="lastupdatetime != null" >
+        lastUpdateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="itemid != null" >
+        #{itemid,jdbcType=VARCHAR},
+      </if>
+      <if test="roomid != null" >
+        #{roomid,jdbcType=INTEGER},
+      </if>
+      <if test="valueid != null" >
+        #{valueid,jdbcType=VARCHAR},
+      </if>
+      <if test="judgeid != null" >
+        #{judgeid,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="judgetime != null" >
+        #{judgetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastupdatetime != null" >
+        #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

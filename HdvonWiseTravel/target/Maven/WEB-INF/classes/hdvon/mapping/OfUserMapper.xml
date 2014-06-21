@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.OfUserMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.OfUser" >
+    <id column="username" property="username" jdbcType="VARCHAR" />
+    <result column="plainPassword" property="plainpassword" jdbcType="VARCHAR" />
+    <result column="encryptedPassword" property="encryptedpassword" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="creationDate" property="creationdate" jdbcType="CHAR" />
+    <result column="modificationDate" property="modificationdate" jdbcType="CHAR" />
+    <result column="idcode" property="idcode" jdbcType="VARCHAR" />
+    <result column="ENTID" property="entid" jdbcType="INTEGER" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="ISADMIN" property="isadmin" jdbcType="INTEGER" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="useType" property="usetype" jdbcType="INTEGER" />
+    <result column="AccountNumber" property="accountnumber" jdbcType="VARCHAR" />
+    <result column="QQ" property="qq" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="TINYINT" />
+    <result column="PICTURE" property="picture" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    username, plainPassword, encryptedPassword, name, email, creationDate, modificationDate, 
+    idcode, ENTID, telephone, ISADMIN, address, useType, AccountNumber, QQ, age, PICTURE, 
+    status, memo
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ofuser
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ofuser
+    where username = #{username,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="hdvon.model.OfUser" >
+    insert into ofuser (username, plainPassword, encryptedPassword, 
+      name, email, creationDate, 
+      modificationDate, idcode, ENTID, 
+      telephone, ISADMIN, address, 
+      useType, AccountNumber, QQ, 
+      age, PICTURE, status, 
+      memo)
+    values (#{username,jdbcType=VARCHAR}, #{plainpassword,jdbcType=VARCHAR}, #{encryptedpassword,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{creationdate,jdbcType=CHAR}, 
+      #{modificationdate,jdbcType=CHAR}, #{idcode,jdbcType=VARCHAR}, #{entid,jdbcType=INTEGER}, 
+      #{telephone,jdbcType=VARCHAR}, #{isadmin,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, 
+      #{usetype,jdbcType=INTEGER}, #{accountnumber,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, 
+      #{age,jdbcType=TINYINT}, #{picture,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{memo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.OfUser" >
+    insert into ofuser
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="plainpassword != null" >
+        plainPassword,
+      </if>
+      <if test="encryptedpassword != null" >
+        encryptedPassword,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="creationdate != null" >
+        creationDate,
+      </if>
+      <if test="modificationdate != null" >
+        modificationDate,
+      </if>
+      <if test="idcode != null" >
+        idcode,
+      </if>
+      <if test="entid != null" >
+        ENTID,
+      </if>
+      <if test="telephone != null" >
+        telephone,
+      </if>
+      <if test="isadmin != null" >
+        ISADMIN,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="usetype != null" >
+        useType,
+      </if>
+      <if test="accountnumber != null" >
+        AccountNumber,
+      </if>
+      <if test="qq != null" >
+        QQ,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="picture != null" >
+        PICTURE,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="memo != null" >
+        memo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="plainpassword != null" >
+        #{plainpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="encryptedpassword != null" >
+        #{encryptedpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="creationdate != null" >
+        #{creationdate,jdbcType=CHAR},
+      </if>
+      <if test="modificationdate != null" >
+        #{modificationdate,jdbcType=CHAR},
+      </if>
+      <if test="idcode != null" >
+        #{idcode,jdbcType=VARCHAR},
+      </if>
+      <if test="entid != null" >
+        #{entid,jdbcType=INTEGER},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="isadmin != null" >
+        #{isadmin,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="usetype != null" >
+        #{usetype,jdbcType=INTEGER},
+      </if>
+      <if test="accountnumber != null" >
+        #{accountnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=TINYINT},
+      </if>
+      <if test="picture != null" >
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hdvon.model.OfUser" >
+    update ofuser
+    <set >
+      <if test="plainpassword != null" >
+        plainPassword = #{plainpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="encryptedpassword != null" >
+        encryptedPassword = #{encryptedpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="creationdate != null" >
+        creationDate = #{creationdate,jdbcType=CHAR},
+      </if>
+      <if test="modificationdate != null" >
+        modificationDate = #{modificationdate,jdbcType=CHAR},
+      </if>
+      <if test="idcode != null" >
+        idcode = #{idcode,jdbcType=VARCHAR},
+      </if>
+      <if test="entid != null" >
+        ENTID = #{entid,jdbcType=INTEGER},
+      </if>
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="isadmin != null" >
+        ISADMIN = #{isadmin,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="usetype != null" >
+        useType = #{usetype,jdbcType=INTEGER},
+      </if>
+      <if test="accountnumber != null" >
+        AccountNumber = #{accountnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        QQ = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=TINYINT},
+      </if>
+      <if test="picture != null" >
+        PICTURE = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where username = #{username,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hdvon.model.OfUser" >
+    update ofuser
+    set plainPassword = #{plainpassword,jdbcType=VARCHAR},
+      encryptedPassword = #{encryptedpassword,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      creationDate = #{creationdate,jdbcType=CHAR},
+      modificationDate = #{modificationdate,jdbcType=CHAR},
+      idcode = #{idcode,jdbcType=VARCHAR},
+      ENTID = #{entid,jdbcType=INTEGER},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      ISADMIN = #{isadmin,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      useType = #{usetype,jdbcType=INTEGER},
+      AccountNumber = #{accountnumber,jdbcType=VARCHAR},
+      QQ = #{qq,jdbcType=VARCHAR},
+      age = #{age,jdbcType=TINYINT},
+      PICTURE = #{picture,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      memo = #{memo,jdbcType=VARCHAR}
+    where username = #{username,jdbcType=VARCHAR}
+  </update>
+</mapper>

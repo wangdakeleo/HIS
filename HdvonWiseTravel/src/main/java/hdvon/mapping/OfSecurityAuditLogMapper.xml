@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.OfSecurityAuditLogMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.OfSecurityAuditLog" >
+    <id column="msgID" property="msgid" jdbcType="BIGINT" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="entryStamp" property="entrystamp" jdbcType="BIGINT" />
+    <result column="summary" property="summary" jdbcType="VARCHAR" />
+    <result column="node" property="node" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="hdvon.model.OfSecurityAuditLog" extends="BaseResultMap" >
+    <result column="details" property="details" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    msgID, username, entryStamp, summary, node
+  </sql>
+  <sql id="Blob_Column_List" >
+    details
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ofsecurityauditlog
+    where msgID = #{msgid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from ofsecurityauditlog
+    where msgID = #{msgid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="hdvon.model.OfSecurityAuditLog" >
+    insert into ofsecurityauditlog (msgID, username, entryStamp, 
+      summary, node, details
+      )
+    values (#{msgid,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{entrystamp,jdbcType=BIGINT}, 
+      #{summary,jdbcType=VARCHAR}, #{node,jdbcType=VARCHAR}, #{details,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.OfSecurityAuditLog" >
+    insert into ofsecurityauditlog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="msgid != null" >
+        msgID,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="entrystamp != null" >
+        entryStamp,
+      </if>
+      <if test="summary != null" >
+        summary,
+      </if>
+      <if test="node != null" >
+        node,
+      </if>
+      <if test="details != null" >
+        details,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="msgid != null" >
+        #{msgid,jdbcType=BIGINT},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="entrystamp != null" >
+        #{entrystamp,jdbcType=BIGINT},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="node != null" >
+        #{node,jdbcType=VARCHAR},
+      </if>
+      <if test="details != null" >
+        #{details,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hdvon.model.OfSecurityAuditLog" >
+    update ofsecurityauditlog
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="entrystamp != null" >
+        entryStamp = #{entrystamp,jdbcType=BIGINT},
+      </if>
+      <if test="summary != null" >
+        summary = #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="node != null" >
+        node = #{node,jdbcType=VARCHAR},
+      </if>
+      <if test="details != null" >
+        details = #{details,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where msgID = #{msgid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="hdvon.model.OfSecurityAuditLog" >
+    update ofsecurityauditlog
+    set username = #{username,jdbcType=VARCHAR},
+      entryStamp = #{entrystamp,jdbcType=BIGINT},
+      summary = #{summary,jdbcType=VARCHAR},
+      node = #{node,jdbcType=VARCHAR},
+      details = #{details,jdbcType=LONGVARCHAR}
+    where msgID = #{msgid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hdvon.model.OfSecurityAuditLog" >
+    update ofsecurityauditlog
+    set username = #{username,jdbcType=VARCHAR},
+      entryStamp = #{entrystamp,jdbcType=BIGINT},
+      summary = #{summary,jdbcType=VARCHAR},
+      node = #{node,jdbcType=VARCHAR}
+    where msgID = #{msgid,jdbcType=BIGINT}
+  </update>
+</mapper>

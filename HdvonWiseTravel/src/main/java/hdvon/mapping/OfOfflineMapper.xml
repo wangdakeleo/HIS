@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.OfOfflineMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.OfOffline" >
+    <id column="username" property="username" jdbcType="VARCHAR" />
+    <id column="messageID" property="messageid" jdbcType="BIGINT" />
+    <result column="creationDate" property="creationdate" jdbcType="CHAR" />
+    <result column="messageSize" property="messagesize" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="hdvon.model.OfOffline" extends="BaseResultMap" >
+    <result column="stanza" property="stanza" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    username, messageID, creationDate, messageSize
+  </sql>
+  <sql id="Blob_Column_List" >
+    stanza
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="hdvon.model.OfOfflineKey" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ofoffline
+    where username = #{username,jdbcType=VARCHAR}
+      and messageID = #{messageid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="hdvon.model.OfOfflineKey" >
+    delete from ofoffline
+    where username = #{username,jdbcType=VARCHAR}
+      and messageID = #{messageid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="hdvon.model.OfOffline" >
+    insert into ofoffline (username, messageID, creationDate, 
+      messageSize, stanza)
+    values (#{username,jdbcType=VARCHAR}, #{messageid,jdbcType=BIGINT}, #{creationdate,jdbcType=CHAR}, 
+      #{messagesize,jdbcType=INTEGER}, #{stanza,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.OfOffline" >
+    insert into ofoffline
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="messageid != null" >
+        messageID,
+      </if>
+      <if test="creationdate != null" >
+        creationDate,
+      </if>
+      <if test="messagesize != null" >
+        messageSize,
+      </if>
+      <if test="stanza != null" >
+        stanza,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="messageid != null" >
+        #{messageid,jdbcType=BIGINT},
+      </if>
+      <if test="creationdate != null" >
+        #{creationdate,jdbcType=CHAR},
+      </if>
+      <if test="messagesize != null" >
+        #{messagesize,jdbcType=INTEGER},
+      </if>
+      <if test="stanza != null" >
+        #{stanza,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hdvon.model.OfOffline" >
+    update ofoffline
+    <set >
+      <if test="creationdate != null" >
+        creationDate = #{creationdate,jdbcType=CHAR},
+      </if>
+      <if test="messagesize != null" >
+        messageSize = #{messagesize,jdbcType=INTEGER},
+      </if>
+      <if test="stanza != null" >
+        stanza = #{stanza,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where username = #{username,jdbcType=VARCHAR}
+      and messageID = #{messageid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="hdvon.model.OfOffline" >
+    update ofoffline
+    set creationDate = #{creationdate,jdbcType=CHAR},
+      messageSize = #{messagesize,jdbcType=INTEGER},
+      stanza = #{stanza,jdbcType=LONGVARCHAR}
+    where username = #{username,jdbcType=VARCHAR}
+      and messageID = #{messageid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hdvon.model.OfOffline" >
+    update ofoffline
+    set creationDate = #{creationdate,jdbcType=CHAR},
+      messageSize = #{messagesize,jdbcType=INTEGER}
+    where username = #{username,jdbcType=VARCHAR}
+      and messageID = #{messageid,jdbcType=BIGINT}
+  </update>
+</mapper>

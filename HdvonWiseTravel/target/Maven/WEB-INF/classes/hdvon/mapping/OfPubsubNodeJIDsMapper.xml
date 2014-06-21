@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.OfPubsubNodeJIDsMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.OfPubsubNodeJIDs" >
+    <id column="serviceID" property="serviceid" jdbcType="VARCHAR" />
+    <id column="nodeID" property="nodeid" jdbcType="VARCHAR" />
+    <id column="jid" property="jid" jdbcType="VARCHAR" />
+    <result column="associationType" property="associationtype" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    serviceID, nodeID, jid, associationType
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="hdvon.model.OfPubsubNodeJIDsKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from ofpubsubnodejids
+    where serviceID = #{serviceid,jdbcType=VARCHAR}
+      and nodeID = #{nodeid,jdbcType=VARCHAR}
+      and jid = #{jid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="hdvon.model.OfPubsubNodeJIDsKey" >
+    delete from ofpubsubnodejids
+    where serviceID = #{serviceid,jdbcType=VARCHAR}
+      and nodeID = #{nodeid,jdbcType=VARCHAR}
+      and jid = #{jid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="hdvon.model.OfPubsubNodeJIDs" >
+    insert into ofpubsubnodejids (serviceID, nodeID, jid, 
+      associationType)
+    values (#{serviceid,jdbcType=VARCHAR}, #{nodeid,jdbcType=VARCHAR}, #{jid,jdbcType=VARCHAR}, 
+      #{associationtype,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.OfPubsubNodeJIDs" >
+    insert into ofpubsubnodejids
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serviceid != null" >
+        serviceID,
+      </if>
+      <if test="nodeid != null" >
+        nodeID,
+      </if>
+      <if test="jid != null" >
+        jid,
+      </if>
+      <if test="associationtype != null" >
+        associationType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serviceid != null" >
+        #{serviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeid != null" >
+        #{nodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="jid != null" >
+        #{jid,jdbcType=VARCHAR},
+      </if>
+      <if test="associationtype != null" >
+        #{associationtype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hdvon.model.OfPubsubNodeJIDs" >
+    update ofpubsubnodejids
+    <set >
+      <if test="associationtype != null" >
+        associationType = #{associationtype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where serviceID = #{serviceid,jdbcType=VARCHAR}
+      and nodeID = #{nodeid,jdbcType=VARCHAR}
+      and jid = #{jid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hdvon.model.OfPubsubNodeJIDs" >
+    update ofpubsubnodejids
+    set associationType = #{associationtype,jdbcType=VARCHAR}
+    where serviceID = #{serviceid,jdbcType=VARCHAR}
+      and nodeID = #{nodeid,jdbcType=VARCHAR}
+      and jid = #{jid,jdbcType=VARCHAR}
+  </update>
+</mapper>

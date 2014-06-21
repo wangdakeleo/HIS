@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.OfVCardMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.OfVCard" >
+    <id column="username" property="username" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="hdvon.model.OfVCard" extends="BaseResultMap" >
+    <result column="vcard" property="vcard" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    username
+  </sql>
+  <sql id="Blob_Column_List" >
+    vcard
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ofvcard
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ofvcard
+    where username = #{username,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="hdvon.model.OfVCard" >
+    insert into ofvcard (username, vcard)
+    values (#{username,jdbcType=VARCHAR}, #{vcard,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.OfVCard" >
+    insert into ofvcard
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="vcard != null" >
+        vcard,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="vcard != null" >
+        #{vcard,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hdvon.model.OfVCard" >
+    update ofvcard
+    <set >
+      <if test="vcard != null" >
+        vcard = #{vcard,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where username = #{username,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="hdvon.model.OfVCard" >
+    update ofvcard
+    set vcard = #{vcard,jdbcType=LONGVARCHAR}
+    where username = #{username,jdbcType=VARCHAR}
+  </update>
+</mapper>

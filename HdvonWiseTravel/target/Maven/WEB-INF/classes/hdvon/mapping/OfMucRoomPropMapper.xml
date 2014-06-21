@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.OfMucRoomPropMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.OfMucRoomProp" >
+    <id column="roomID" property="roomid" jdbcType="BIGINT" />
+    <id column="name" property="name" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="hdvon.model.OfMucRoomProp" extends="BaseResultMap" >
+    <result column="propValue" property="propvalue" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    roomID, name
+  </sql>
+  <sql id="Blob_Column_List" >
+    propValue
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="hdvon.model.OfMucRoomPropKey" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ofmucroomprop
+    where roomID = #{roomid,jdbcType=BIGINT}
+      and name = #{name,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="hdvon.model.OfMucRoomPropKey" >
+    delete from ofmucroomprop
+    where roomID = #{roomid,jdbcType=BIGINT}
+      and name = #{name,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="hdvon.model.OfMucRoomProp" >
+    insert into ofmucroomprop (roomID, name, propValue
+      )
+    values (#{roomid,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{propvalue,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.OfMucRoomProp" >
+    insert into ofmucroomprop
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roomid != null" >
+        roomID,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="propvalue != null" >
+        propValue,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roomid != null" >
+        #{roomid,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="propvalue != null" >
+        #{propvalue,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hdvon.model.OfMucRoomProp" >
+    update ofmucroomprop
+    <set >
+      <if test="propvalue != null" >
+        propValue = #{propvalue,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where roomID = #{roomid,jdbcType=BIGINT}
+      and name = #{name,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="hdvon.model.OfMucRoomProp" >
+    update ofmucroomprop
+    set propValue = #{propvalue,jdbcType=LONGVARCHAR}
+    where roomID = #{roomid,jdbcType=BIGINT}
+      and name = #{name,jdbcType=VARCHAR}
+  </update>
+</mapper>

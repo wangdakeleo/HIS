@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.OfUserPropMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.OfUserProp" >
+    <id column="username" property="username" jdbcType="VARCHAR" />
+    <id column="name" property="name" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="hdvon.model.OfUserProp" extends="BaseResultMap" >
+    <result column="propValue" property="propvalue" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    username, name
+  </sql>
+  <sql id="Blob_Column_List" >
+    propValue
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="hdvon.model.OfUserPropKey" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from ofuserprop
+    where username = #{username,jdbcType=VARCHAR}
+      and name = #{name,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="hdvon.model.OfUserPropKey" >
+    delete from ofuserprop
+    where username = #{username,jdbcType=VARCHAR}
+      and name = #{name,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="hdvon.model.OfUserProp" >
+    insert into ofuserprop (username, name, propValue
+      )
+    values (#{username,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{propvalue,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.OfUserProp" >
+    insert into ofuserprop
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="propvalue != null" >
+        propValue,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="propvalue != null" >
+        #{propvalue,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hdvon.model.OfUserProp" >
+    update ofuserprop
+    <set >
+      <if test="propvalue != null" >
+        propValue = #{propvalue,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where username = #{username,jdbcType=VARCHAR}
+      and name = #{name,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="hdvon.model.OfUserProp" >
+    update ofuserprop
+    set propValue = #{propvalue,jdbcType=LONGVARCHAR}
+    where username = #{username,jdbcType=VARCHAR}
+      and name = #{name,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="hdvon.dao.OfPubsubSubscriptionMapper" >
+  <resultMap id="BaseResultMap" type="hdvon.model.OfPubsubSubscription" >
+    <id column="serviceID" property="serviceid" jdbcType="VARCHAR" />
+    <id column="nodeID" property="nodeid" jdbcType="VARCHAR" />
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="jid" property="jid" jdbcType="VARCHAR" />
+    <result column="owner" property="owner" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="deliver" property="deliver" jdbcType="TINYINT" />
+    <result column="digest" property="digest" jdbcType="TINYINT" />
+    <result column="digest_frequency" property="digestFrequency" jdbcType="INTEGER" />
+    <result column="expire" property="expire" jdbcType="CHAR" />
+    <result column="includeBody" property="includebody" jdbcType="TINYINT" />
+    <result column="showValues" property="showvalues" jdbcType="VARCHAR" />
+    <result column="subscriptionType" property="subscriptiontype" jdbcType="VARCHAR" />
+    <result column="subscriptionDepth" property="subscriptiondepth" jdbcType="TINYINT" />
+    <result column="keyword" property="keyword" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    serviceID, nodeID, id, jid, owner, state, deliver, digest, digest_frequency, expire, 
+    includeBody, showValues, subscriptionType, subscriptionDepth, keyword
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="hdvon.model.OfPubsubSubscriptionKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from ofpubsubsubscription
+    where serviceID = #{serviceid,jdbcType=VARCHAR}
+      and nodeID = #{nodeid,jdbcType=VARCHAR}
+      and id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="hdvon.model.OfPubsubSubscriptionKey" >
+    delete from ofpubsubsubscription
+    where serviceID = #{serviceid,jdbcType=VARCHAR}
+      and nodeID = #{nodeid,jdbcType=VARCHAR}
+      and id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="hdvon.model.OfPubsubSubscription" >
+    insert into ofpubsubsubscription (serviceID, nodeID, id, 
+      jid, owner, state, 
+      deliver, digest, digest_frequency, 
+      expire, includeBody, showValues, 
+      subscriptionType, subscriptionDepth, keyword
+      )
+    values (#{serviceid,jdbcType=VARCHAR}, #{nodeid,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR}, 
+      #{jid,jdbcType=VARCHAR}, #{owner,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, 
+      #{deliver,jdbcType=TINYINT}, #{digest,jdbcType=TINYINT}, #{digestFrequency,jdbcType=INTEGER}, 
+      #{expire,jdbcType=CHAR}, #{includebody,jdbcType=TINYINT}, #{showvalues,jdbcType=VARCHAR}, 
+      #{subscriptiontype,jdbcType=VARCHAR}, #{subscriptiondepth,jdbcType=TINYINT}, #{keyword,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="hdvon.model.OfPubsubSubscription" >
+    insert into ofpubsubsubscription
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="serviceid != null" >
+        serviceID,
+      </if>
+      <if test="nodeid != null" >
+        nodeID,
+      </if>
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="jid != null" >
+        jid,
+      </if>
+      <if test="owner != null" >
+        owner,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="deliver != null" >
+        deliver,
+      </if>
+      <if test="digest != null" >
+        digest,
+      </if>
+      <if test="digestFrequency != null" >
+        digest_frequency,
+      </if>
+      <if test="expire != null" >
+        expire,
+      </if>
+      <if test="includebody != null" >
+        includeBody,
+      </if>
+      <if test="showvalues != null" >
+        showValues,
+      </if>
+      <if test="subscriptiontype != null" >
+        subscriptionType,
+      </if>
+      <if test="subscriptiondepth != null" >
+        subscriptionDepth,
+      </if>
+      <if test="keyword != null" >
+        keyword,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="serviceid != null" >
+        #{serviceid,jdbcType=VARCHAR},
+      </if>
+      <if test="nodeid != null" >
+        #{nodeid,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="jid != null" >
+        #{jid,jdbcType=VARCHAR},
+      </if>
+      <if test="owner != null" >
+        #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="deliver != null" >
+        #{deliver,jdbcType=TINYINT},
+      </if>
+      <if test="digest != null" >
+        #{digest,jdbcType=TINYINT},
+      </if>
+      <if test="digestFrequency != null" >
+        #{digestFrequency,jdbcType=INTEGER},
+      </if>
+      <if test="expire != null" >
+        #{expire,jdbcType=CHAR},
+      </if>
+      <if test="includebody != null" >
+        #{includebody,jdbcType=TINYINT},
+      </if>
+      <if test="showvalues != null" >
+        #{showvalues,jdbcType=VARCHAR},
+      </if>
+      <if test="subscriptiontype != null" >
+        #{subscriptiontype,jdbcType=VARCHAR},
+      </if>
+      <if test="subscriptiondepth != null" >
+        #{subscriptiondepth,jdbcType=TINYINT},
+      </if>
+      <if test="keyword != null" >
+        #{keyword,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="hdvon.model.OfPubsubSubscription" >
+    update ofpubsubsubscription
+    <set >
+      <if test="jid != null" >
+        jid = #{jid,jdbcType=VARCHAR},
+      </if>
+      <if test="owner != null" >
+        owner = #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="deliver != null" >
+        deliver = #{deliver,jdbcType=TINYINT},
+      </if>
+      <if test="digest != null" >
+        digest = #{digest,jdbcType=TINYINT},
+      </if>
+      <if test="digestFrequency != null" >
+        digest_frequency = #{digestFrequency,jdbcType=INTEGER},
+      </if>
+      <if test="expire != null" >
+        expire = #{expire,jdbcType=CHAR},
+      </if>
+      <if test="includebody != null" >
+        includeBody = #{includebody,jdbcType=TINYINT},
+      </if>
+      <if test="showvalues != null" >
+        showValues = #{showvalues,jdbcType=VARCHAR},
+      </if>
+      <if test="subscriptiontype != null" >
+        subscriptionType = #{subscriptiontype,jdbcType=VARCHAR},
+      </if>
+      <if test="subscriptiondepth != null" >
+        subscriptionDepth = #{subscriptiondepth,jdbcType=TINYINT},
+      </if>
+      <if test="keyword != null" >
+        keyword = #{keyword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where serviceID = #{serviceid,jdbcType=VARCHAR}
+      and nodeID = #{nodeid,jdbcType=VARCHAR}
+      and id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="hdvon.model.OfPubsubSubscription" >
+    update ofpubsubsubscription
+    set jid = #{jid,jdbcType=VARCHAR},
+      owner = #{owner,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      deliver = #{deliver,jdbcType=TINYINT},
+      digest = #{digest,jdbcType=TINYINT},
+      digest_frequency = #{digestFrequency,jdbcType=INTEGER},
+      expire = #{expire,jdbcType=CHAR},
+      includeBody = #{includebody,jdbcType=TINYINT},
+      showValues = #{showvalues,jdbcType=VARCHAR},
+      subscriptionType = #{subscriptiontype,jdbcType=VARCHAR},
+      subscriptionDepth = #{subscriptiondepth,jdbcType=TINYINT},
+      keyword = #{keyword,jdbcType=VARCHAR}
+    where serviceID = #{serviceid,jdbcType=VARCHAR}
+      and nodeID = #{nodeid,jdbcType=VARCHAR}
+      and id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
